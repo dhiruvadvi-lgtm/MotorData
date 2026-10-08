@@ -1,463 +1,1338 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Motor Winding Data</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Motor Winding Data</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-  <img src="logo.png" alt="Logo" class="logo">
-  <div>
-    <h1>Motor Winding Data</h1>
-    <p>Motor   Save  Search </p>
-  </div>
+
+    <div class="logo-box">
+        <img src="logo.png" alt="Logo" class="logo">
+    </div>
+
+    <div class="header-text">
+        <h1>Motor Winding Data</h1>
+        <p>Motor ka data save aur search kare</p>
+    </div>
+
 </header>
 
-<div class="container">
 
-  <div class="top-box">
-    <h2> Saved Motors: <span id="motorCount">0</span></h2>
-  </div>
+<main>
 
-  <!-- SEARCH -->
-  <div class="card">
-    <h2> Motor Search</h2>
+    <!-- TOTAL DATA -->
 
-    <input
-      type="text"
-      id="searchBox"
-      placeholder="Stator, Golai, Rotor, Pitch, Turns, Wire, HP  search ..."
-      oninput="searchMotors()"
-    >
+    <section class="stats">
 
-    <div id="searchResults"></div>
-  </div>
+        <div class="stat-box">
+            <div class="stat-icon"></div>
 
-  <!-- ADD MOTOR -->
-  <div class="card">
-    <h2>  Motor  </h2>
+            <div>
+                <span>Total Motors</span>
+                <strong id="totalMotors">0</strong>
+            </div>
+        </div>
 
-    <div class="grid">
 
-      <div>
-        <label>Motor Name</label>
-        <input id="motor_name" type="text" placeholder=" 3 HP Motor">
-      </div>
+        <div class="stat-box">
+            <div class="stat-icon"></div>
 
-      <div>
-        <label>HP</label>
-        <input id="hp" type="text" placeholder=" 3 HP">
-      </div>
+            <div>
+                <span>Search Result</span>
+                <strong id="searchCount">0</strong>
+            </div>
+        </div>
 
-      <div>
-        <label>Voltage</label>
-        <input id="voltage" type="text" placeholder=" 230V">
-      </div>
+    </section>
 
-      <div>
-        <label>RPM</label>
-        <input id="rpm" type="text" placeholder=" 1440">
-      </div>
 
-      <div>
-        <label>Stator Length</label>
-        <input id="stator_length" type="text" placeholder=" 80 mm">
-      </div>
+    <!-- ADD MOTOR -->
 
-      <div>
-        <label>Stator Golai</label>
-        <input id="stator_golai" type="text" placeholder=" 100 mm">
-      </div>
+    <section class="form-card">
 
-      <div>
-        <label>Rotor Length</label>
-        <input id="rotor_length" type="text" placeholder=" 75 mm">
-      </div>
+        <h2> New Motor Data</h2>
 
-      <div>
-        <label>Slot</label>
-        <input id="slot" type="text" placeholder=" 24">
-      </div>
+        <div class="form-grid">
 
-      <div>
-        <label>Pitch</label>
-        <input id="pitch" type="text" placeholder=" 1-5">
-      </div>
+            <div class="field">
+                <label>Motor Name / Customer</label>
+                <input id="motorName" type="text" placeholder="Example: 3 HP Motor">
+            </div>
 
-      <div>
-        <label>Turns</label>
-        <input id="turns" type="text" placeholder=" 80 Turns">
-      </div>
+            <div class="field">
+                <label>HP</label>
+                <input id="hp" type="text" placeholder="Example: 3 HP">
+            </div>
 
-      <div>
-        <label>Wire</label>
-        <input id="wire" type="text" placeholder=" 24 SWG">
-      </div>
+            <div class="field">
+                <label>Voltage</label>
+                <input id="voltage" type="text" placeholder="Example: 415V">
+            </div>
 
-      <div>
-        <label>Connection</label>
-        <input id="connection" type="text" placeholder=" Star / Delta">
-      </div>
+            <div class="field">
+                <label>RPM</label>
+                <input id="rpm" type="text" placeholder="Example: 1440">
+            </div>
+
+            <div class="field">
+                <label>Stator Length</label>
+                <input id="statorLength" type="text" placeholder="Example: 100 mm">
+            </div>
+
+            <div class="field">
+                <label>Stator Golai</label>
+                <input id="statorGolai" type="text" placeholder="Example: 120 mm">
+            </div>
+
+            <div class="field">
+                <label>Rotor Length</label>
+                <input id="rotorLength" type="text" placeholder="Example: 95 mm">
+            </div>
+
+            <div class="field">
+                <label>Slot</label>
+                <input id="slot" type="text" placeholder="Example: 36">
+            </div>
+
+            <div class="field">
+                <label>Pitch</label>
+                <input id="pitch" type="text" placeholder="Example: 1-10">
+            </div>
+
+            <div class="field">
+                <label>Turns</label>
+                <input id="turns" type="text" placeholder="Example: 28">
+            </div>
+
+            <div class="field">
+                <label>Wire Size</label>
+                <input id="wire" type="text" placeholder="Example: 0.90 mm">
+            </div>
+
+            <div class="field">
+
+                <label>Connection Type</label>
+
+                <select id="connection">
+
+                    <option value="">Select Connection</option>
+
+                    <option value="Star">Star</option>
+
+                    <option value="Delta">Delta</option>
+
+                    <option value="Star-Delta">Star-Delta</option>
+
+                    <option value="Other">Other</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field full">
+
+                <label>Coil / Winding Details</label>
+
+                <textarea
+                    id="coilDetails"
+                    placeholder="Coil group, coil span, parallel wire etc."
+                ></textarea>
+
+            </div>
+
+
+            <div class="field full">
+
+                <label>Extra Notes</label>
+
+                <textarea
+                    id="notes"
+                    placeholder="Koi bhi extra information..."
+                ></textarea>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="save-btn"
+            onclick="saveMotor()"
+        >
+             Save Motor Data
+        </button>
+
+
+        <button
+            class="clear-btn"
+            onclick="clearForm()"
+        >
+            Clear
+        </button>
+
+    </section>
+
+
+    <!-- SEARCH -->
+
+    <section class="saved-card">
+
+        <div class="list-header">
+
+            <div>
+
+                <h2> Saved Motors</h2>
+
+                <p class="search-help">
+                    Name, HP, Stator Length, Stator Golai,
+                    Rotor Length, Pitch, Turns, Wire, Slot
+                    ya koi bhi data search kare.
+                </p>
+
+            </div>
+
+
+            <div class="search-box">
+
+                <span></span>
+
+                <input
+                    id="search"
+                    type="search"
+                    placeholder="Search motor data..."
+                    oninput="showMotors()"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div id="motorList"></div>
+
+    </section>
+
+</main>
+
+
+<!-- VIEW POPUP -->
+
+<div id="detailsBox" class="popup">
+
+    <div class="popup-content">
+
+        <button
+            class="close"
+            onclick="closeDetails()"
+        >
+            ×
+        </button>
+
+        <div id="details"></div>
 
     </div>
-
-    <label>Coil Details</label>
-    <textarea id="coil_details" placeholder="Coil    "></textarea>
-
-    <label>Notes</label>
-    <textarea id="notes" placeholder="  "></textarea>
-
-    <button onclick="saveMotor()" id="saveBtn">
-       Motor Save 
-    </button>
-
-    <p id="message"></p>
-  </div>
-
-  <!-- ALL DATA -->
-  <div class="card">
-    <div class="title-row">
-      <h2>  Motor Data</h2>
-      <button class="small-btn" onclick="loadMotors()"> Refresh</button>
-    </div>
-
-    <div id="motorList">
-      Loading...
-    </div>
-  </div>
 
 </div>
-
-<footer>
-  Motor Winding Data © 2026
-</footer>
 
 
 <script>
 
+/* =====================================================
+   SUPABASE CONNECTION
+   ===================================================== */
+
 const SUPABASE_URL =
-"https://sqljlammpfeohiswudmv.supabase.co";
+    "https://sqljlammpfeohiswudmv.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_0OcqH2qkGYF9U3vYtSZBMA_X0ryMcw2";
+    "sb_publishable_0OcqH2qkGYF9U3vYtSZBMA_X0ryMcw2";
 
 
-const headers = {
-  "apikey": SUPABASE_KEY,
-  "Content-Type": "application/json"
+const SUPABASE_HEADERS = {
+
+    "apikey": SUPABASE_KEY,
+
+    "Content-Type": "application/json"
+
 };
 
 
-// =============================
-// LOAD MOTOR DATA
-// =============================
+let motors = [];
 
-let allMotors = [];
+let editId = null;
+
+
+/* =====================================================
+   LOAD ONLINE DATA
+   ===================================================== */
 
 async function loadMotors() {
 
-  try {
+    try {
 
-    const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/motors?select=*&order=id.desc`,
-      {
-        method: "GET",
-        headers: headers
-      }
-    );
+        const response = await fetch(
 
-    if (!response.ok) {
-      throw new Error(await response.text());
+            SUPABASE_URL +
+            "/rest/v1/motors?select=*&order=id.desc",
+
+            {
+                method: "GET",
+
+                headers: SUPABASE_HEADERS
+            }
+
+        );
+
+
+        if (!response.ok) {
+
+            const errorText =
+                await response.text();
+
+            throw new Error(
+                "Supabase Error: " +
+                response.status +
+                " " +
+                errorText
+            );
+
+        }
+
+
+        motors = await response.json();
+
+
+        showMotors();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        document.getElementById(
+            "motorList"
+        ).innerHTML = `
+
+            <div class="empty">
+
+                <div></div>
+
+                <p>
+                    Online data load nahi hua.
+                </p>
+
+                <small>
+                    ${escapeHTML(error.message)}
+                </small>
+
+            </div>
+
+        `;
+
     }
 
-    allMotors = await response.json();
-
-    document.getElementById("motorCount").innerText =
-      allMotors.length;
-
-    displayMotors(allMotors);
-
-  } catch (error) {
-
-    console.error(error);
-
-    document.getElementById("motorList").innerHTML =
-      `<div class="error"> Data load  </div>`;
-  }
 }
 
 
-// =============================
-// SAVE MOTOR
-// =============================
+/* =====================================================
+   SAVE / UPDATE MOTOR
+   ===================================================== */
 
 async function saveMotor() {
 
-  const btn = document.getElementById("saveBtn");
-  const message = document.getElementById("message");
+    const motor = {
 
-  const motor = {
+        motor_name:
+            document.getElementById("motorName").value.trim(),
 
-    motor_name: getValue("motor_name"),
-    hp: getValue("hp"),
-    voltage: getValue("voltage"),
-    rpm: getValue("rpm"),
-    stator_length: getValue("stator_length"),
-    stator_golai: getValue("stator_golai"),
-    rotor_length: getValue("rotor_length"),
-    slot: getValue("slot"),
-    pitch: getValue("pitch"),
-    turns: getValue("turns"),
-    wire: getValue("wire"),
-    connection: getValue("connection"),
-    coil_details: getValue("coil_details"),
-    notes: getValue("notes")
+        hp:
+            document.getElementById("hp").value.trim(),
 
-  };
+        voltage:
+            document.getElementById("voltage").value.trim(),
 
+        rpm:
+            document.getElementById("rpm").value.trim(),
 
-  if (
-    !motor.motor_name &&
-    !motor.hp &&
-    !motor.stator_length &&
-    !motor.stator_golai
-  ) {
+        stator_length:
+            document.getElementById("statorLength").value.trim(),
 
-    message.innerHTML =
-      "    Motor Name  Motor    ";
+        stator_golai:
+            document.getElementById("statorGolai").value.trim(),
 
-    return;
-  }
+        rotor_length:
+            document.getElementById("rotorLength").value.trim(),
 
+        slot:
+            document.getElementById("slot").value.trim(),
 
-  btn.disabled = true;
-  btn.innerText = " Saving...";
+        pitch:
+            document.getElementById("pitch").value.trim(),
 
+        turns:
+            document.getElementById("turns").value.trim(),
 
-  try {
+        wire:
+            document.getElementById("wire").value.trim(),
 
-    const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/motors`,
-      {
-        method: "POST",
+        connection:
+            document.getElementById("connection").value,
 
-        headers: {
-          ...headers,
-          "Prefer": "return=representation"
-        },
+        coil_details:
+            document.getElementById("coilDetails").value.trim(),
 
-        body: JSON.stringify(motor)
-      }
-    );
+        notes:
+            document.getElementById("notes").value.trim()
+
+    };
 
 
-    if (!response.ok) {
-      throw new Error(await response.text());
+    /* REQUIRED DATA CHECK */
+
+    if (
+        !motor.motor_name &&
+        !motor.hp &&
+        !motor.stator_length
+    ) {
+
+        alert(
+            "Motor Name, HP ya Stator Length me se kuch data bhare."
+        );
+
+        return;
+
     }
 
 
-    message.innerHTML =
-      " Motor Data  Save  !";
+    try {
 
-    message.className = "success";
-
-
-    clearForm();
-
-    await loadMotors();
+        let response;
 
 
-  } catch (error) {
+        /* =========================
+           NEW MOTOR
+           ========================= */
 
-    console.error(error);
+        if (editId === null) {
 
-    message.innerHTML =
-      " Save  : " + error.message;
+            response = await fetch(
 
-    message.className = "error";
+                SUPABASE_URL +
+                "/rest/v1/motors",
 
-  }
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        ...SUPABASE_HEADERS,
+
+                        "Prefer":
+                            "return=representation"
+
+                    },
+
+                    body:
+                        JSON.stringify(motor)
+
+                }
+
+            );
+
+        }
 
 
-  btn.disabled = false;
-  btn.innerText = " Motor Save ";
+        /* =========================
+           UPDATE MOTOR
+           ========================= */
+
+        else {
+
+            response = await fetch(
+
+                SUPABASE_URL +
+                "/rest/v1/motors?id=eq." +
+                encodeURIComponent(editId),
+
+                {
+
+                    method: "PATCH",
+
+                    headers: {
+
+                        ...SUPABASE_HEADERS,
+
+                        "Prefer":
+                            "return=representation"
+
+                    },
+
+                    body:
+                        JSON.stringify(motor)
+
+                }
+
+            );
+
+        }
+
+
+        /* CHECK ERROR */
+
+        if (!response.ok) {
+
+            const errorText =
+                await response.text();
+
+            throw new Error(
+                response.status +
+                " - " +
+                errorText
+            );
+
+        }
+
+
+        if (editId === null) {
+
+            alert(
+                " Motor data online save ho gaya!"
+            );
+
+        } else {
+
+            alert(
+                " Motor data online update ho gaya!"
+            );
+
+        }
+
+
+        editId = null;
+
+
+        clearForm();
+
+
+        await loadMotors();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        alert(
+            " Save/Update nahi hua.\n\n" +
+            error.message
+        );
+
+    }
+
 }
 
 
-// =============================
-// SEARCH
-// =============================
+/* =====================================================
+   SHOW MOTORS
+   ===================================================== */
 
-function searchMotors() {
+function showMotors() {
 
-  const search =
-    document.getElementById("searchBox")
-    .value
-    .trim()
-    .toLowerCase();
+    const list =
+        document.getElementById("motorList");
 
 
-  if (!search) {
-
-    displayMotors(allMotors);
-
-    return;
-  }
-
-
-  const results = allMotors.filter(motor => {
-
-    return Object.values(motor)
-      .join(" ")
-      .toLowerCase()
-      .includes(search);
-
-  });
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .trim()
+        .toLowerCase();
 
 
-  displayMotors(results);
+    list.innerHTML = "";
+
+
+    const filtered =
+        motors.filter(motor => {
+
+            const allData = [
+
+                motor.motor_name,
+
+                motor.hp,
+
+                motor.voltage,
+
+                motor.rpm,
+
+                motor.stator_length,
+
+                motor.stator_golai,
+
+                motor.rotor_length,
+
+                motor.slot,
+
+                motor.pitch,
+
+                motor.turns,
+
+                motor.wire,
+
+                motor.connection,
+
+                motor.coil_details,
+
+                motor.notes
+
+            ]
+            .join(" ")
+            .toLowerCase();
+
+
+            return allData.includes(search);
+
+        });
+
+
+    document.getElementById(
+        "totalMotors"
+    ).textContent = motors.length;
+
+
+    document.getElementById(
+        "searchCount"
+    ).textContent = filtered.length;
+
+
+    if (filtered.length === 0) {
+
+        list.innerHTML = `
+
+            <div class="empty">
+
+                <div></div>
+
+                <p>
+
+                    ${
+                        search
+                        ? "Is search ka motor data nahi mila."
+                        : "Abhi koi motor data save nahi hai."
+                    }
+
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    filtered.forEach(motor => {
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "motor-item";
+
+
+        const date =
+            motor.created_at
+            ? new Date(
+                motor.created_at
+              ).toLocaleDateString("en-IN")
+            : "";
+
+
+        card.innerHTML = `
+
+            <div class="motor-title">
+
+                <div>
+
+                    <h3>
+
+                        ${highlight(
+                            motor.motor_name ||
+                            "Motor"
+                        )}
+
+                    </h3>
+
+
+                    <span>
+
+                        ${highlight(
+                            motor.hp || ""
+                        )}
+
+                        ${
+                            motor.connection
+                            ? " • " +
+                              highlight(
+                                  motor.connection
+                              )
+                            : ""
+                        }
+
+                    </span>
+
+                </div>
+
+
+                <small>
+                    ${date}
+                </small>
+
+            </div>
+
+
+            <div class="quick-data">
+
+
+                <div>
+
+                    <b>Stator Length</b>
+
+                    <span>
+                        ${highlight(
+                            motor.stator_length || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <b>Stator Golai</b>
+
+                    <span>
+                        ${highlight(
+                            motor.stator_golai || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <b>Rotor Length</b>
+
+                    <span>
+                        ${highlight(
+                            motor.rotor_length || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <b>Pitch</b>
+
+                    <span>
+                        ${highlight(
+                            motor.pitch || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <b>Turns</b>
+
+                    <span>
+                        ${highlight(
+                            motor.turns || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <b>Wire</b>
+
+                    <span>
+                        ${highlight(
+                            motor.wire || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <b>Slot</b>
+
+                    <span>
+                        ${highlight(
+                            motor.slot || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <b>RPM</b>
+
+                    <span>
+                        ${highlight(
+                            motor.rpm || "-"
+                        )}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="buttons">
+
+
+                <button
+                    class="view-btn"
+                    onclick="viewMotor(${motor.id})"
+                >
+                     View
+                </button>
+
+
+                <button
+                    class="edit-btn"
+                    onclick="editMotor(${motor.id})"
+                >
+                     Edit
+                </button>
+
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteMotor(${motor.id})"
+                >
+                     Delete
+                </button>
+
+
+            </div>
+
+        `;
+
+
+        list.appendChild(card);
+
+    });
+
 }
 
 
-// =============================
-// DISPLAY DATA
-// =============================
+/* =====================================================
+   SEARCH HIGHLIGHT
+   ===================================================== */
 
-function displayMotors(motors) {
+function highlight(value) {
 
-  const box =
-    document.getElementById("motorList");
-
-
-  if (!motors.length) {
-
-    box.innerHTML =
-      `<div class="no-data">
-          Motor Data  
-      </div>`;
-
-    return;
-  }
+    const safe =
+        escapeHTML(value);
 
 
-  box.innerHTML = motors.map(motor => `
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .trim();
 
-    <div class="motor-card">
 
-      <div class="motor-title">
-         ${escapeHTML(motor.motor_name || "Motor")}
-      </div>
+    if (!search) {
 
-      <div class="data-grid">
+        return safe;
 
-        ${dataItem("HP", motor.hp)}
-        ${dataItem("Voltage", motor.voltage)}
-        ${dataItem("RPM", motor.rpm)}
-        ${dataItem("Stator Length", motor.stator_length)}
-        ${dataItem("Stator Golai", motor.stator_golai)}
-        ${dataItem("Rotor Length", motor.rotor_length)}
-        ${dataItem("Slot", motor.slot)}
-        ${dataItem("Pitch", motor.pitch)}
-        ${dataItem("Turns", motor.turns)}
-        ${dataItem("Wire", motor.wire)}
-        ${dataItem("Connection", motor.connection)}
+    }
 
-      </div>
 
-      ${
-        motor.coil_details
-        ? `<div class="extra">
-            <b>Coil Details:</b><br>
-            ${escapeHTML(motor.coil_details)}
-           </div>`
-        : ""
-      }
+    const escapedSearch =
+        search.replace(
+            /[.*+?^${}()|[\]\\]/g,
+            "\\$&"
+        );
 
-      ${
-        motor.notes
-        ? `<div class="extra">
-            <b>Notes:</b><br>
-            ${escapeHTML(motor.notes)}
-           </div>`
-        : ""
-      }
 
-    </div>
+    const regex =
+        new RegExp(
+            "(" +
+            escapedSearch +
+            ")",
+            "gi"
+        );
 
-  `).join("");
+
+    return safe.replace(
+        regex,
+        "<mark>$1</mark>"
+    );
+
 }
 
 
-// =============================
-// HELPER
-// =============================
+/* =====================================================
+   VIEW MOTOR
+   ===================================================== */
 
-function getValue(id) {
+function viewMotor(id) {
 
-  return document
-    .getElementById(id)
-    .value
-    .trim();
+    const m =
+        motors.find(
+            motor =>
+                String(motor.id) === String(id)
+        );
+
+
+    if (!m) {
+
+        alert("Motor data nahi mila.");
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "details"
+    ).innerHTML = `
+
+        <h2>
+            
+            ${escapeHTML(
+                m.motor_name ||
+                "Motor"
+            )}
+        </h2>
+
+
+        <div class="details-grid">
+
+            ${detail("HP", m.hp)}
+
+            ${detail("Voltage", m.voltage)}
+
+            ${detail("RPM", m.rpm)}
+
+            ${detail(
+                "Stator Length",
+                m.stator_length
+            )}
+
+            ${detail(
+                "Stator Golai",
+                m.stator_golai
+            )}
+
+            ${detail(
+                "Rotor Length",
+                m.rotor_length
+            )}
+
+            ${detail(
+                "Slot",
+                m.slot
+            )}
+
+            ${detail(
+                "Pitch",
+                m.pitch
+            )}
+
+            ${detail(
+                "Turns",
+                m.turns
+            )}
+
+            ${detail(
+                "Wire Size",
+                m.wire
+            )}
+
+            ${detail(
+                "Connection",
+                m.connection
+            )}
+
+        </div>
+
+
+        <div class="long-detail">
+
+            <b>
+                Coil / Winding Details
+            </b>
+
+            <p>
+                ${escapeHTML(
+                    m.coil_details || "-"
+                )}
+            </p>
+
+        </div>
+
+
+        <div class="long-detail">
+
+            <b>
+                Extra Notes
+            </b>
+
+            <p>
+                ${escapeHTML(
+                    m.notes || "-"
+                )}
+            </p>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "detailsBox"
+    ).style.display = "flex";
+
 }
 
 
-function dataItem(label, value) {
+/* =====================================================
+   DETAIL
+   ===================================================== */
 
-  if (!value) return "";
+function detail(name, value) {
 
-  return `
-    <div class="data-item">
-      <span>${label}</span>
-      <b>${escapeHTML(value)}</b>
-    </div>
-  `;
+    return `
+
+        <div>
+
+            <b>${name}</b>
+
+            <span>
+                ${escapeHTML(
+                    value || "-"
+                )}
+            </span>
+
+        </div>
+
+    `;
+
 }
 
 
-function escapeHTML(value) {
+/* =====================================================
+   CLOSE POPUP
+   ===================================================== */
 
-  return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+function closeDetails() {
+
+    document.getElementById(
+        "detailsBox"
+    ).style.display = "none";
+
 }
 
+
+/* =====================================================
+   EDIT MOTOR
+   ===================================================== */
+
+function editMotor(id) {
+
+    const m =
+        motors.find(
+            motor =>
+                String(motor.id) === String(id)
+        );
+
+
+    if (!m) {
+
+        alert("Motor data nahi mila.");
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "motorName"
+    ).value =
+        m.motor_name || "";
+
+
+    document.getElementById(
+        "hp"
+    ).value =
+        m.hp || "";
+
+
+    document.getElementById(
+        "voltage"
+    ).value =
+        m.voltage || "";
+
+
+    document.getElementById(
+        "rpm"
+    ).value =
+        m.rpm || "";
+
+
+    document.getElementById(
+        "statorLength"
+    ).value =
+        m.stator_length || "";
+
+
+    document.getElementById(
+        "statorGolai"
+    ).value =
+        m.stator_golai || "";
+
+
+    document.getElementById(
+        "rotorLength"
+    ).value =
+        m.rotor_length || "";
+
+
+    document.getElementById(
+        "slot"
+    ).value =
+        m.slot || "";
+
+
+    document.getElementById(
+        "pitch"
+    ).value =
+        m.pitch || "";
+
+
+    document.getElementById(
+        "turns"
+    ).value =
+        m.turns || "";
+
+
+    document.getElementById(
+        "wire"
+    ).value =
+        m.wire || "";
+
+
+    document.getElementById(
+        "connection"
+    ).value =
+        m.connection || "";
+
+
+    document.getElementById(
+        "coilDetails"
+    ).value =
+        m.coil_details || "";
+
+
+    document.getElementById(
+        "notes"
+    ).value =
+        m.notes || "";
+
+
+    editId = m.id;
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* =====================================================
+   DELETE MOTOR
+   ===================================================== */
+
+async function deleteMotor(id) {
+
+    if (
+        !confirm(
+            "Kya aap ye motor data delete karna chahte ho?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                SUPABASE_URL +
+                "/rest/v1/motors?id=eq." +
+                encodeURIComponent(id),
+
+                {
+
+                    method: "DELETE",
+
+                    headers:
+                        SUPABASE_HEADERS
+
+                }
+
+            );
+
+
+        if (!response.ok) {
+
+            const errorText =
+                await response.text();
+
+            throw new Error(
+                response.status +
+                " - " +
+                errorText
+            );
+
+        }
+
+
+        alert(
+            " Motor data delete ho gaya!"
+        );
+
+
+        await loadMotors();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        alert(
+            " Delete nahi hua.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CLEAR FORM
+   ===================================================== */
 
 function clearForm() {
 
-  const ids = [
-    "motor_name",
-    "hp",
-    "voltage",
-    "rpm",
-    "stator_length",
-    "stator_golai",
-    "rotor_length",
-    "slot",
-    "pitch",
-    "turns",
-    "wire",
-    "connection",
-    "coil_details",
-    "notes"
-  ];
+    document
+        .querySelectorAll(
+            "input, textarea"
+        )
+        .forEach(el => {
+
+            if (
+                el.id !== "search"
+            ) {
+
+                el.value = "";
+
+            }
+
+        });
 
 
-  ids.forEach(id => {
+    document.getElementById(
+        "connection"
+    ).value = "";
 
-    document.getElementById(id).value = "";
 
-  });
+    editId = null;
+
 }
 
 
-// START
+/* =====================================================
+   SECURITY
+   ===================================================== */
+
+function escapeHTML(value) {
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   START WEBSITE
+   ===================================================== */
+
 loadMotors();
 
 </script>
