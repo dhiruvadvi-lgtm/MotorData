@@ -1,681 +1,302 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f3f5f8;
-    color: #17202a;
-    padding-bottom: 40px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f5f7;
+  color: #222;
 }
 
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 header {
-    background: linear-gradient(135deg, #b40000, #e32626);
-    color: #ffffff;
-    padding: 18px 16px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
-}
-
-.logo-box {
-    width: 58px;
-    height: 58px;
-    background: #ffffff;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    flex-shrink: 0;
+  background: linear-gradient(135deg, #111, #292929);
+  color: white;
+  padding: 18px 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.2);
 }
 
 .logo {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: white;
+  padding: 4px;
 }
 
-.header-text h1 {
-    font-size: 24px;
-    margin-bottom: 4px;
+header h1 {
+  margin: 0;
+  font-size: 25px;
 }
 
-.header-text p {
-    font-size: 13px;
-    opacity: 0.92;
-}
-
-
-/* =========================
-   MAIN
-========================= */
-
-main {
-    width: 94%;
-    max-width: 1050px;
-    margin: 22px auto;
+header p {
+  margin: 5px 0 0;
+  color: #ddd;
+  font-size: 14px;
 }
 
 
-/* =========================
-   STATISTICS
-========================= */
+/* CONTAINER */
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    margin-bottom: 20px;
-}
-
-.stat-box {
-    background: #ffffff;
-    border-radius: 14px;
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
-    border-left: 5px solid #d00000;
-}
-
-.stat-icon {
-    width: 45px;
-    height: 45px;
-    border-radius: 10px;
-    background: #ffe8e8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 23px;
-}
-
-.stat-box span {
-    display: block;
-    font-size: 13px;
-    color: #777777;
-    margin-bottom: 3px;
-}
-
-.stat-box strong {
-    display: block;
-    font-size: 24px;
-    color: #c00000;
+.container {
+  max-width: 950px;
+  margin: auto;
+  padding: 15px;
 }
 
 
-/* =========================
-   COMMON CARD
-========================= */
+/* TOP COUNT */
 
-.form-card,
-.saved-card {
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 22px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+.top-box {
+  background: #fff;
+  padding: 14px;
+  border-radius: 14px;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  text-align: center;
 }
 
-.form-card h2,
-.saved-card h2 {
-    font-size: 20px;
-    margin-bottom: 18px;
+.top-box h2 {
+  margin: 0;
+  color: #d71920;
+}
+
+#motorCount {
+  font-size: 28px;
 }
 
 
-/* =========================
-   FORM
-========================= */
+/* CARD */
 
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+.card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 18px;
+  border-radius: 15px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.08);
 }
 
-.field {
-    display: flex;
-    flex-direction: column;
+.card h2 {
+  margin-top: 0;
+  color: #222;
 }
 
-.field.full {
-    grid-column: 1 / -1;
-}
 
-label {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 7px;
-    color: #30343a;
-}
+/* INPUT */
 
 input,
-select,
 textarea {
-    width: 100%;
-    border: 1px solid #d5d9df;
-    border-radius: 9px;
-    padding: 12px;
-    font-size: 15px;
-    outline: none;
-    background: #ffffff;
-    color: #222222;
-    transition: 0.2s;
-}
-
-input::placeholder,
-textarea::placeholder {
-    color: #999999;
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  font-size: 15px;
+  outline: none;
 }
 
 input:focus,
-select:focus,
 textarea:focus {
-    border-color: #d00000;
-    box-shadow: 0 0 0 3px rgba(208, 0, 0, 0.09);
+  border-color: #d71920;
+  box-shadow: 0 0 0 2px rgba(215,25,32,0.1);
 }
 
 textarea {
-    min-height: 90px;
-    resize: vertical;
+  min-height: 90px;
+  resize: vertical;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 3px;
 }
 
 
-/* =========================
-   SAVE BUTTON
-========================= */
+/* FORM GRID */
 
-.save-btn {
-    margin-top: 20px;
-    width: 100%;
-    padding: 14px;
-    background: #d00000;
-    color: #ffffff;
-    border-radius: 9px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.save-btn:hover {
-    background: #a90000;
-}
-
-.save-btn:active {
-    transform: scale(0.98);
-}
-
-.clear-btn {
-    margin-top: 10px;
-    width: 100%;
-    padding: 12px;
-    background: #e9edf2;
-    color: #333333;
-    border-radius: 9px;
-    font-size: 14px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-}
-
-.clear-btn:hover {
-    background: #dce1e7;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 15px;
 }
 
 
-/* =========================
-   SAVED MOTOR HEADER
-========================= */
+/* BUTTON */
 
-.list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 18px;
-    margin-bottom: 18px;
+button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 9px;
+  background: #d71920;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.list-header h2 {
-    margin-bottom: 4px;
+button:hover {
+  background: #b9151b;
 }
 
-.search-help {
-    font-size: 12px;
-    color: #777777;
-    line-height: 1.5;
-    max-width: 570px;
-}
-
-
-/* =========================
-   SEARCH BOX
-========================= */
-
-.search-box {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    width: 330px;
-    background: #f5f6f8;
-    border: 1px solid #d8dce1;
-    border-radius: 10px;
-    padding: 0 10px;
-    flex-shrink: 0;
-}
-
-.search-box span {
-    font-size: 18px;
-}
-
-.search-box input {
-    border: none;
-    background: transparent;
-    padding: 12px 5px;
-    box-shadow: none;
-}
-
-.search-box input:focus {
-    border: none;
-    box-shadow: none;
+button:disabled {
+  opacity: 0.6;
 }
 
 
-/* =========================
-   MOTOR ITEM
-========================= */
+/* REFRESH */
 
-.motor-item {
-    border: 1px solid #e0e4e8;
-    border-radius: 13px;
-    padding: 16px;
-    margin-bottom: 13px;
-    background: #ffffff;
-    transition: 0.2s;
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
 
-.motor-item:hover {
-    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
-    border-color: #cccccc;
+.small-btn {
+  width: auto;
+  padding: 8px 13px;
+  font-size: 13px;
 }
 
 
-/* =========================
-   MOTOR TITLE
-========================= */
+/* MOTOR CARD */
+
+.motor-card {
+  border: 1px solid #ddd;
+  border-left: 5px solid #d71920;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 14px;
+  background: #fafafa;
+}
 
 .motor-title {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 14px;
-}
-
-.motor-title h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-    color: #20252b;
-}
-
-.motor-title span {
-    font-size: 13px;
-    color: #666666;
-}
-
-.motor-title small {
-    color: #888888;
-    white-space: nowrap;
+  font-size: 20px;
+  font-weight: bold;
+  color: #d71920;
+  margin-bottom: 12px;
 }
 
 
-/* =========================
-   QUICK DATA
-========================= */
+/* DATA GRID */
 
-.quick-data {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 15px;
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
 }
 
-.quick-data div {
-    background: #f5f6f8;
-    border-radius: 8px;
-    padding: 10px;
-    min-width: 0;
+.data-item {
+  background: white;
+  padding: 9px;
+  border-radius: 7px;
+  border: 1px solid #eee;
 }
 
-.quick-data b {
-    display: block;
-    font-size: 11px;
-    color: #777777;
-    margin-bottom: 4px;
+.data-item span {
+  display: block;
+  font-size: 12px;
+  color: #777;
 }
 
-.quick-data span {
-    font-size: 14px;
-    font-weight: bold;
-    color: #20252b;
-    word-break: break-word;
+.data-item b {
+  display: block;
+  margin-top: 3px;
 }
 
 
-/* =========================
-   SEARCH HIGHLIGHT
-========================= */
+/* EXTRA */
 
-mark {
-    background: #ffe66d;
-    color: #111111;
-    border-radius: 3px;
-    padding: 1px 3px;
+.extra {
+  background: white;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  line-height: 1.5;
 }
 
 
-/* =========================
-   BUTTONS
-========================= */
+/* MESSAGE */
 
-.buttons {
-    display: flex;
-    gap: 8px;
+#message {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0;
 }
 
-.buttons button {
-    flex: 1;
-    padding: 10px 7px;
-    border-radius: 7px;
-    font-size: 13px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: 0.2s;
+.success {
+  color: green;
 }
 
-.buttons button:active {
-    transform: scale(0.97);
+.error {
+  color: #d71920;
 }
 
-.view-btn {
-    background: #edf3ff;
-    color: #1557b0;
-}
-
-.view-btn:hover {
-    background: #dce9ff;
-}
-
-.edit-btn {
-    background: #fff4db;
-    color: #a76700;
-}
-
-.edit-btn:hover {
-    background: #ffebc0;
-}
-
-.delete-btn {
-    background: #ffe8e8;
-    color: #c00000;
-}
-
-.delete-btn:hover {
-    background: #ffd5d5;
+.no-data {
+  text-align: center;
+  padding: 25px;
+  color: #777;
 }
 
 
-/* =========================
-   EMPTY
-========================= */
+/* FOOTER */
 
-.empty {
-    text-align: center;
-    padding: 40px 10px;
-    color: #777777;
-}
-
-.empty div {
-    font-size: 42px;
-    margin-bottom: 10px;
-}
-
-.empty p {
-    font-size: 14px;
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-size: 13px;
 }
 
 
-/* =========================
-   POPUP
-========================= */
+/* MOBILE */
 
-.popup {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.68);
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    z-index: 1000;
-}
+@media (max-width: 600px) {
 
-.popup-content {
-    background: #ffffff;
-    width: 100%;
-    max-width: 650px;
-    max-height: 90vh;
-    overflow-y: auto;
-    border-radius: 16px;
-    padding: 22px;
-    position: relative;
-}
+  header {
+    padding: 14px 12px;
+  }
 
-.close {
-    position: absolute;
-    right: 14px;
-    top: 10px;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background: #eeeeee;
-    color: #333333;
-    font-size: 23px;
-    border: none;
-    cursor: pointer;
-}
+  .logo {
+    width: 55px;
+    height: 55px;
+  }
 
-.close:hover {
-    background: #dddddd;
-}
+  header h1 {
+    font-size: 20px;
+  }
 
-#details h2 {
-    padding-right: 40px;
-    color: #c00000;
-}
-
-
-/* =========================
-   DETAILS
-========================= */
-
-.details-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 18px;
-}
-
-.details-grid div {
-    background: #f4f6f8;
-    border-radius: 9px;
-    padding: 11px;
-}
-
-.details-grid b {
-    display: block;
-    color: #777777;
+  header p {
     font-size: 12px;
-    margin-bottom: 4px;
-}
+  }
 
-.details-grid span {
-    font-weight: bold;
-    color: #222222;
-    word-break: break-word;
-}
+  .container {
+    padding: 10px;
+  }
 
-.long-detail {
-    margin-top: 15px;
-    padding: 13px;
-    background: #f4f6f8;
-    border-radius: 9px;
-}
+  .card {
+    padding: 15px;
+  }
 
-.long-detail b {
-    display: block;
-    margin-bottom: 7px;
-}
+  .grid {
+    grid-template-columns: 1fr;
+  }
 
-.long-detail p {
-    white-space: pre-wrap;
-    color: #555555;
-    line-height: 1.5;
-}
+  .data-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 700px) {
-
-    main {
-        width: 94%;
-        margin-top: 15px;
-    }
-
-    header {
-        padding: 15px 13px;
-    }
-
-    .logo-box {
-        width: 50px;
-        height: 50px;
-    }
-
-    .header-text h1 {
-        font-size: 20px;
-    }
-
-    .header-text p {
-        font-size: 11px;
-    }
-
-    .stats {
-        gap: 10px;
-    }
-
-    .stat-box {
-        padding: 12px;
-    }
-
-    .stat-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 19px;
-    }
-
-    .stat-box span {
-        font-size: 11px;
-    }
-
-    .stat-box strong {
-        font-size: 21px;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .field.full {
-        grid-column: auto;
-    }
-
-    .form-card,
-    .saved-card {
-        padding: 15px;
-        border-radius: 13px;
-    }
-
-    .list-header {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .search-box {
-        width: 100%;
-    }
-
-    .quick-data {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .motor-title {
-        flex-direction: column;
-    }
-
-    .motor-title small {
-        font-size: 11px;
-    }
-
-    .buttons {
-        flex-wrap: wrap;
-    }
-
-    .buttons button {
-        min-width: 30%;
-    }
-
-    .details-grid {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-
-/* =========================
-   SMALL MOBILE
-========================= */
-
-@media (max-width: 400px) {
-
-    .stats {
-        grid-template-columns: 1fr;
-    }
-
-    .quick-data {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .buttons {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .buttons .view-btn {
-        grid-column: 1 / -1;
-    }
+  .motor-title {
+    font-size: 18px;
+  }
 
 }
