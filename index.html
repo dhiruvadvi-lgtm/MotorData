@@ -32,7 +32,7 @@
     <section class="stats">
 
         <div class="stat-box">
-            <div class="stat-icon"></div>
+            <div class="stat-icon">âš™ï¸</div>
 
             <div>
                 <span>Total Motors</span>
@@ -42,7 +42,7 @@
 
 
         <div class="stat-box">
-            <div class="stat-icon"></div>
+            <div class="stat-icon">ðŸ”</div>
 
             <div>
                 <span>Search Result</span>
@@ -53,68 +53,136 @@
     </section>
 
 
+
     <!-- ADD MOTOR -->
 
     <section class="form-card">
 
-        <h2> New Motor Data</h2>
+        <h2>âž• New Motor Data</h2>
 
         <div class="form-grid">
 
+
             <div class="field">
                 <label>Motor Name / Customer</label>
-                <input id="motorName" type="text" placeholder="Example: 3 HP Motor">
+
+                <input
+                    id="motorName"
+                    type="text"
+                    placeholder="Example: 3 HP Motor"
+                >
             </div>
+
 
             <div class="field">
                 <label>HP</label>
-                <input id="hp" type="text" placeholder="Example: 3 HP">
+
+                <input
+                    id="hp"
+                    type="text"
+                    placeholder="Example: 3 HP"
+                >
             </div>
+
 
             <div class="field">
                 <label>Voltage</label>
-                <input id="voltage" type="text" placeholder="Example: 415V">
+
+                <input
+                    id="voltage"
+                    type="text"
+                    placeholder="Example: 415V"
+                >
             </div>
+
 
             <div class="field">
                 <label>RPM</label>
-                <input id="rpm" type="text" placeholder="Example: 1440">
+
+                <input
+                    id="rpm"
+                    type="text"
+                    placeholder="Example: 1440"
+                >
             </div>
+
 
             <div class="field">
                 <label>Stator Length</label>
-                <input id="statorLength" type="text" placeholder="Example: 100 mm">
+
+                <input
+                    id="statorLength"
+                    type="text"
+                    placeholder="Example: 100 mm"
+                >
             </div>
+
 
             <div class="field">
                 <label>Stator Golai</label>
-                <input id="statorGolai" type="text" placeholder="Example: 120 mm">
+
+                <input
+                    id="statorGolai"
+                    type="text"
+                    placeholder="Example: 120 mm"
+                >
             </div>
+
 
             <div class="field">
                 <label>Rotor Length</label>
-                <input id="rotorLength" type="text" placeholder="Example: 95 mm">
+
+                <input
+                    id="rotorLength"
+                    type="text"
+                    placeholder="Example: 95 mm"
+                >
             </div>
+
 
             <div class="field">
                 <label>Slot</label>
-                <input id="slot" type="text" placeholder="Example: 36">
+
+                <input
+                    id="slot"
+                    type="text"
+                    placeholder="Example: 36"
+                >
             </div>
+
 
             <div class="field">
                 <label>Pitch</label>
-                <input id="pitch" type="text" placeholder="Example: 1-10">
+
+                <input
+                    id="pitch"
+                    type="text"
+                    placeholder="Example: 1-10"
+                >
             </div>
+
 
             <div class="field">
                 <label>Turns</label>
-                <input id="turns" type="text" placeholder="Example: 28">
+
+                <input
+                    id="turns"
+                    type="text"
+                    placeholder="Example: 28"
+                >
             </div>
+
 
             <div class="field">
                 <label>Wire Size</label>
-                <input id="wire" type="text" placeholder="Example: 0.90 mm">
+
+                <input
+                    id="wire"
+                    type="text"
+                    placeholder="Example: 0.90 mm"
+                >
             </div>
+
 
             <div class="field">
 
@@ -124,13 +192,21 @@
 
                     <option value="">Select Connection</option>
 
-                    <option value="Star">Star</option>
+                    <option value="Star">
+                        Star
+                    </option>
 
-                    <option value="Delta">Delta</option>
+                    <option value="Delta">
+                        Delta
+                    </option>
 
-                    <option value="Star-Delta">Star-Delta</option>
+                    <option value="Star-Delta">
+                        Star-Delta
+                    </option>
 
-                    <option value="Other">Other</option>
+                    <option value="Other">
+                        Other
+                    </option>
 
                 </select>
 
@@ -139,7 +215,9 @@
 
             <div class="field full">
 
-                <label>Coil / Winding Details</label>
+                <label>
+                    Coil / Winding Details
+                </label>
 
                 <textarea
                     id="coilDetails"
@@ -151,7 +229,9 @@
 
             <div class="field full">
 
-                <label>Extra Notes</label>
+                <label>
+                    Extra Notes
+                </label>
 
                 <textarea
                     id="notes"
@@ -167,7 +247,7 @@
             class="save-btn"
             onclick="saveMotor()"
         >
-             Save Motor Data
+            ðŸ’¾ Save Motor Data
         </button>
 
 
@@ -181,6 +261,7 @@
     </section>
 
 
+
     <!-- SEARCH -->
 
     <section class="saved-card">
@@ -188,21 +269,19 @@
         <div class="list-header">
 
             <div>
-
-                <h2> Saved Motors</h2>
+                <h2>ðŸ“‹ Saved Motors</h2>
 
                 <p class="search-help">
                     Name, HP, Stator Length, Stator Golai,
                     Rotor Length, Pitch, Turns, Wire, Slot
                     ya koi bhi data search kare.
                 </p>
-
             </div>
 
 
             <div class="search-box">
 
-                <span></span>
+                <span>ðŸ”</span>
 
                 <input
                     id="search"
@@ -223,9 +302,13 @@
 </main>
 
 
+
 <!-- VIEW POPUP -->
 
-<div id="detailsBox" class="popup">
+<div
+    id="detailsBox"
+    class="popup"
+>
 
     <div class="popup-content">
 
@@ -233,7 +316,7 @@
             class="close"
             onclick="closeDetails()"
         >
-            �
+            Ã—
         </button>
 
         <div id="details"></div>
@@ -243,115 +326,26 @@
 </div>
 
 
+
 <script>
 
-/* =====================================================
-   SUPABASE CONNECTION
-   ===================================================== */
-
-const SUPABASE_URL =
-    "https://sqljlammpfeohiswudmv.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_0OcqH2qkGYF9U3vYtSZBMA_X0ryMcw2";
+let motors =
+    JSON.parse(
+        localStorage.getItem("motorData")
+    ) || [];
 
 
-const SUPABASE_HEADERS = {
-
-    "apikey": SUPABASE_KEY,
-
-    "Content-Type": "application/json"
-
-};
+let editIndex = -1;
 
 
-let motors = [];
 
-let editId = null;
+/* SAVE */
 
-
-/* =====================================================
-   LOAD ONLINE DATA
-   ===================================================== */
-
-async function loadMotors() {
-
-    try {
-
-        const response = await fetch(
-
-            SUPABASE_URL +
-            "/rest/v1/motors?select=*&order=id.desc",
-
-            {
-                method: "GET",
-
-                headers: SUPABASE_HEADERS
-            }
-
-        );
-
-
-        if (!response.ok) {
-
-            const errorText =
-                await response.text();
-
-            throw new Error(
-                "Supabase Error: " +
-                response.status +
-                " " +
-                errorText
-            );
-
-        }
-
-
-        motors = await response.json();
-
-
-        showMotors();
-
-
-    } catch (error) {
-
-        console.error(error);
-
-
-        document.getElementById(
-            "motorList"
-        ).innerHTML = `
-
-            <div class="empty">
-
-                <div></div>
-
-                <p>
-                    Online data load nahi hua.
-                </p>
-
-                <small>
-                    ${escapeHTML(error.message)}
-                </small>
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* =====================================================
-   SAVE / UPDATE MOTOR
-   ===================================================== */
-
-async function saveMotor() {
+function saveMotor() {
 
     const motor = {
 
-        motor_name:
+        motorName:
             document.getElementById("motorName").value.trim(),
 
         hp:
@@ -363,13 +357,13 @@ async function saveMotor() {
         rpm:
             document.getElementById("rpm").value.trim(),
 
-        stator_length:
+        statorLength:
             document.getElementById("statorLength").value.trim(),
 
-        stator_golai:
+        statorGolai:
             document.getElementById("statorGolai").value.trim(),
 
-        rotor_length:
+        rotorLength:
             document.getElementById("rotorLength").value.trim(),
 
         slot:
@@ -387,21 +381,22 @@ async function saveMotor() {
         connection:
             document.getElementById("connection").value,
 
-        coil_details:
+        coilDetails:
             document.getElementById("coilDetails").value.trim(),
 
         notes:
-            document.getElementById("notes").value.trim()
+            document.getElementById("notes").value.trim(),
+
+        date:
+            new Date().toLocaleDateString("en-IN")
 
     };
 
 
-    /* REQUIRED DATA CHECK */
-
     if (
-        !motor.motor_name &&
+        !motor.motorName &&
         !motor.hp &&
-        !motor.stator_length
+        !motor.statorLength
     ) {
 
         alert(
@@ -409,148 +404,46 @@ async function saveMotor() {
         );
 
         return;
+    }
+
+
+    if (editIndex === -1) {
+
+        motors.unshift(motor);
+
+        alert("âœ… Motor data save ho gaya!");
+
+    } else {
+
+        motors[editIndex] = motor;
+
+        editIndex = -1;
+
+        alert("âœ… Motor data update ho gaya!");
 
     }
 
 
-    try {
-
-        let response;
-
-
-        /* =========================
-           NEW MOTOR
-           ========================= */
-
-        if (editId === null) {
-
-            response = await fetch(
-
-                SUPABASE_URL +
-                "/rest/v1/motors",
-
-                {
-
-                    method: "POST",
-
-                    headers: {
-
-                        ...SUPABASE_HEADERS,
-
-                        "Prefer":
-                            "return=representation"
-
-                    },
-
-                    body:
-                        JSON.stringify(motor)
-
-                }
-
-            );
-
-        }
+    localStorage.setItem(
+        "motorData",
+        JSON.stringify(motors)
+    );
 
 
-        /* =========================
-           UPDATE MOTOR
-           ========================= */
+    clearForm();
 
-        else {
-
-            response = await fetch(
-
-                SUPABASE_URL +
-                "/rest/v1/motors?id=eq." +
-                encodeURIComponent(editId),
-
-                {
-
-                    method: "PATCH",
-
-                    headers: {
-
-                        ...SUPABASE_HEADERS,
-
-                        "Prefer":
-                            "return=representation"
-
-                    },
-
-                    body:
-                        JSON.stringify(motor)
-
-                }
-
-            );
-
-        }
-
-
-        /* CHECK ERROR */
-
-        if (!response.ok) {
-
-            const errorText =
-                await response.text();
-
-            throw new Error(
-                response.status +
-                " - " +
-                errorText
-            );
-
-        }
-
-
-        if (editId === null) {
-
-            alert(
-                " Motor data online save ho gaya!"
-            );
-
-        } else {
-
-            alert(
-                " Motor data online update ho gaya!"
-            );
-
-        }
-
-
-        editId = null;
-
-
-        clearForm();
-
-
-        await loadMotors();
-
-
-    } catch (error) {
-
-        console.error(error);
-
-
-        alert(
-            " Save/Update nahi hua.\n\n" +
-            error.message
-        );
-
-    }
+    showMotors();
 
 }
 
 
-/* =====================================================
-   SHOW MOTORS
-   ===================================================== */
+
+/* SHOW */
 
 function showMotors() {
 
     const list =
         document.getElementById("motorList");
-
 
     const search =
         document
@@ -568,32 +461,23 @@ function showMotors() {
 
             const allData = [
 
-                motor.motor_name,
-
+                motor.motorName,
                 motor.hp,
-
                 motor.voltage,
-
                 motor.rpm,
 
-                motor.stator_length,
-
-                motor.stator_golai,
-
-                motor.rotor_length,
+                motor.statorLength,
+                motor.statorGolai,
+                motor.rotorLength,
 
                 motor.slot,
-
                 motor.pitch,
-
                 motor.turns,
 
                 motor.wire,
-
                 motor.connection,
 
-                motor.coil_details,
-
+                motor.coilDetails,
                 motor.notes
 
             ]
@@ -616,22 +500,21 @@ function showMotors() {
     ).textContent = filtered.length;
 
 
+
     if (filtered.length === 0) {
 
         list.innerHTML = `
 
             <div class="empty">
 
-                <div></div>
+                <div>ðŸ“­</div>
 
                 <p>
-
                     ${
                         search
                         ? "Is search ka motor data nahi mila."
                         : "Abhi koi motor data save nahi hai."
                     }
-
                 </p>
 
             </div>
@@ -639,11 +522,14 @@ function showMotors() {
         `;
 
         return;
-
     }
 
 
+
     filtered.forEach(motor => {
+
+        const originalIndex =
+            motors.indexOf(motor);
 
 
         const card =
@@ -654,14 +540,6 @@ function showMotors() {
             "motor-item";
 
 
-        const date =
-            motor.created_at
-            ? new Date(
-                motor.created_at
-              ).toLocaleDateString("en-IN")
-            : "";
-
-
         card.innerHTML = `
 
             <div class="motor-title">
@@ -669,86 +547,74 @@ function showMotors() {
                 <div>
 
                     <h3>
-
                         ${highlight(
-                            motor.motor_name ||
+                            motor.motorName ||
                             "Motor"
                         )}
-
                     </h3>
 
-
                     <span>
-
                         ${highlight(
                             motor.hp || ""
                         )}
 
                         ${
                             motor.connection
-                            ? " � " +
+                            ? " â€¢ " +
                               highlight(
                                   motor.connection
                               )
                             : ""
                         }
-
                     </span>
 
                 </div>
 
 
                 <small>
-                    ${date}
+                    ${motor.date || ""}
                 </small>
 
             </div>
 
 
+
             <div class="quick-data">
 
-
                 <div>
-
                     <b>Stator Length</b>
 
                     <span>
                         ${highlight(
-                            motor.stator_length || "-"
+                            motor.statorLength || "-"
                         )}
                     </span>
-
                 </div>
 
 
                 <div>
-
                     <b>Stator Golai</b>
 
                     <span>
                         ${highlight(
-                            motor.stator_golai || "-"
+                            motor.statorGolai || "-"
                         )}
                     </span>
-
                 </div>
 
 
                 <div>
-
                     <b>Rotor Length</b>
 
                     <span>
                         ${highlight(
-                            motor.rotor_length || "-"
+                            motor.rotorLength || "-"
                         )}
                     </span>
-
                 </div>
 
 
                 <div>
-
                     <b>Pitch</b>
 
                     <span>
@@ -756,12 +622,10 @@ function showMotors() {
                             motor.pitch || "-"
                         )}
                     </span>
-
                 </div>
 
 
                 <div>
-
                     <b>Turns</b>
 
                     <span>
@@ -769,12 +633,10 @@ function showMotors() {
                             motor.turns || "-"
                         )}
                     </span>
-
                 </div>
 
 
                 <div>
-
                     <b>Wire</b>
 
                     <span>
@@ -782,12 +644,10 @@ function showMotors() {
                             motor.wire || "-"
                         )}
                     </span>
-
                 </div>
 
 
                 <div>
-
                     <b>Slot</b>
 
                     <span>
@@ -795,12 +655,10 @@ function showMotors() {
                             motor.slot || "-"
                         )}
                     </span>
-
                 </div>
 
 
                 <div>
-
                     <b>RPM</b>
 
                     <span>
@@ -808,39 +666,36 @@ function showMotors() {
                             motor.rpm || "-"
                         )}
                     </span>
-
                 </div>
-
 
             </div>
 
 
-            <div class="buttons">
 
+            <div class="buttons">
 
                 <button
                     class="view-btn"
-                    onclick="viewMotor(${motor.id})"
+                    onclick="viewMotor(${originalIndex})"
                 >
-                     View
+                    ðŸ‘ View
                 </button>
 
 
                 <button
                     class="edit-btn"
-                    onclick="editMotor(${motor.id})"
+                    onclick="editMotor(${originalIndex})"
                 >
-                     Edit
+                    âœ Edit
                 </button>
 
 
                 <button
                     class="delete-btn"
-                    onclick="deleteMotor(${motor.id})"
+                    onclick="deleteMotor(${originalIndex})"
                 >
-                     Delete
+                    ðŸ—‘ Delete
                 </button>
-
 
             </div>
 
@@ -854,9 +709,8 @@ function showMotors() {
 }
 
 
-/* =====================================================
-   SEARCH HIGHLIGHT
-   ===================================================== */
+
+/* SEARCH HIGHLIGHT */
 
 function highlight(value) {
 
@@ -872,9 +726,7 @@ function highlight(value) {
 
 
     if (!search) {
-
         return safe;
-
     }
 
 
@@ -887,9 +739,7 @@ function highlight(value) {
 
     const regex =
         new RegExp(
-            "(" +
-            escapedSearch +
-            ")",
+            "(" + escapedSearch + ")",
             "gi"
         );
 
@@ -902,26 +752,12 @@ function highlight(value) {
 }
 
 
-/* =====================================================
-   VIEW MOTOR
-   ===================================================== */
 
-function viewMotor(id) {
+/* VIEW */
 
-    const m =
-        motors.find(
-            motor =>
-                String(motor.id) === String(id)
-        );
+function viewMotor(index) {
 
-
-    if (!m) {
-
-        alert("Motor data nahi mila.");
-
-        return;
-
-    }
+    const m = motors[index];
 
 
     document.getElementById(
@@ -929,10 +765,9 @@ function viewMotor(id) {
     ).innerHTML = `
 
         <h2>
-            
+            âš¡
             ${escapeHTML(
-                m.motor_name ||
-                "Motor"
+                m.motorName || "Motor"
             )}
         </h2>
 
@@ -947,33 +782,24 @@ function viewMotor(id) {
 
             ${detail(
                 "Stator Length",
-                m.stator_length
+                m.statorLength
             )}
 
             ${detail(
                 "Stator Golai",
-                m.stator_golai
+                m.statorGolai
             )}
 
             ${detail(
                 "Rotor Length",
-                m.rotor_length
+                m.rotorLength
             )}
 
-            ${detail(
-                "Slot",
-                m.slot
-            )}
+            ${detail("Slot", m.slot)}
 
-            ${detail(
-                "Pitch",
-                m.pitch
-            )}
+            ${detail("Pitch", m.pitch)}
 
-            ${detail(
-                "Turns",
-                m.turns
-            )}
+            ${detail("Turns", m.turns)}
 
             ${detail(
                 "Wire Size",
@@ -996,7 +822,7 @@ function viewMotor(id) {
 
             <p>
                 ${escapeHTML(
-                    m.coil_details || "-"
+                    m.coilDetails || "-"
                 )}
             </p>
 
@@ -1027,9 +853,8 @@ function viewMotor(id) {
 }
 
 
-/* =====================================================
-   DETAIL
-   ===================================================== */
+
+/* DETAIL */
 
 function detail(name, value) {
 
@@ -1052,9 +877,8 @@ function detail(name, value) {
 }
 
 
-/* =====================================================
-   CLOSE POPUP
-   ===================================================== */
+
+/* CLOSE */
 
 function closeDetails() {
 
@@ -1065,68 +889,50 @@ function closeDetails() {
 }
 
 
-/* =====================================================
-   EDIT MOTOR
-   ===================================================== */
 
-function editMotor(id) {
+/* EDIT */
 
-    const m =
-        motors.find(
-            motor =>
-                String(motor.id) === String(id)
-        );
+function editMotor(index) {
 
-
-    if (!m) {
-
-        alert("Motor data nahi mila.");
-
-        return;
-
-    }
+    const m = motors[index];
 
 
     document.getElementById(
         "motorName"
-    ).value =
-        m.motor_name || "";
+    ).value = m.motorName || "";
 
 
     document.getElementById(
         "hp"
-    ).value =
-        m.hp || "";
+    ).value = m.hp || "";
 
 
     document.getElementById(
         "voltage"
-    ).value =
-        m.voltage || "";
+    ).value = m.voltage || "";
 
 
     document.getElementById(
         "rpm"
-    ).value =
-        m.rpm || "";
+    ).value = m.rpm || "";
 
 
     document.getElementById(
         "statorLength"
     ).value =
-        m.stator_length || "";
+        m.statorLength || "";
 
 
     document.getElementById(
         "statorGolai"
     ).value =
-        m.stator_golai || "";
+        m.statorGolai || "";
 
 
     document.getElementById(
         "rotorLength"
     ).value =
-        m.rotor_length || "";
+        m.rotorLength || "";
 
 
     document.getElementById(
@@ -1162,7 +968,7 @@ function editMotor(id) {
     document.getElementById(
         "coilDetails"
     ).value =
-        m.coil_details || "";
+        m.coilDetails || "";
 
 
     document.getElementById(
@@ -1171,98 +977,47 @@ function editMotor(id) {
         m.notes || "";
 
 
-    editId = m.id;
+    editIndex = index;
 
 
     window.scrollTo({
-
         top: 0,
-
         behavior: "smooth"
-
     });
 
 }
 
 
-/* =====================================================
-   DELETE MOTOR
-   ===================================================== */
 
-async function deleteMotor(id) {
+/* DELETE */
+
+function deleteMotor(index) {
 
     if (
         !confirm(
             "Kya aap ye motor data delete karna chahte ho?"
         )
     ) {
-
         return;
-
     }
 
 
-    try {
-
-        const response =
-            await fetch(
-
-                SUPABASE_URL +
-                "/rest/v1/motors?id=eq." +
-                encodeURIComponent(id),
-
-                {
-
-                    method: "DELETE",
-
-                    headers:
-                        SUPABASE_HEADERS
-
-                }
-
-            );
+    motors.splice(index, 1);
 
 
-        if (!response.ok) {
-
-            const errorText =
-                await response.text();
-
-            throw new Error(
-                response.status +
-                " - " +
-                errorText
-            );
-
-        }
+    localStorage.setItem(
+        "motorData",
+        JSON.stringify(motors)
+    );
 
 
-        alert(
-            " Motor data delete ho gaya!"
-        );
-
-
-        await loadMotors();
-
-
-    } catch (error) {
-
-        console.error(error);
-
-
-        alert(
-            " Delete nahi hua.\n\n" +
-            error.message
-        );
-
-    }
+    showMotors();
 
 }
 
 
-/* =====================================================
-   CLEAR FORM
-   ===================================================== */
+
+/* CLEAR */
 
 function clearForm() {
 
@@ -1275,9 +1030,7 @@ function clearForm() {
             if (
                 el.id !== "search"
             ) {
-
                 el.value = "";
-
             }
 
         });
@@ -1288,14 +1041,13 @@ function clearForm() {
     ).value = "";
 
 
-    editId = null;
+    editIndex = -1;
 
 }
 
 
-/* =====================================================
-   SECURITY
-   ===================================================== */
+
+/* SECURITY */
 
 function escapeHTML(value) {
 
@@ -1329,11 +1081,10 @@ function escapeHTML(value) {
 }
 
 
-/* =====================================================
-   START WEBSITE
-   ===================================================== */
 
-loadMotors();
+/* START */
+
+showMotors();
 
 </script>
 
