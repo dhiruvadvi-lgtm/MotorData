@@ -3,12 +3,9 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Motor Winding Data</title><link rel="stylesheet" href="style.css">
 <style>
-/* ==================================
-   MOTOR WINDING DATA - PREMIUM UI
-   Theme: Red, Black & White
-================================== */
 
-* {
+
+ {
     box-sizing: border-box;
 }
 
@@ -609,19 +606,19 @@ button:disabled {
 <div class="field"><label>HP</label><input id="hp" placeholder="Example: 3 HP"></div>
 <div class="field"><label>Voltage</label><input id="voltage" placeholder="Example: 415V"></div>
 <div class="field"><label>RPM</label><input id="rpm" placeholder="Example: 1440"></div>
-<div class="field"><label>Stator Length</label><input id="statorLength" placeholder="Example: 100 mm"></div>
-<div class="field"><label>Stator Golai</label><input id="statorGolai" placeholder="Example: 120 mm"></div>
-<div class="field"><label>Rotor Length</label><input id="rotorLength" placeholder="Example: 95 mm"></div>
+<div class="field"><label>loter Length</label><input id="statorLength" placeholder="Example: 100 mm"></div>
+<div class="field"><label>loter Golai</label><input id="statorGolai" placeholder="Example: 120 mm"></div>
+<div class="field"><label>steter Golai</label><input id="rotorLength" placeholder="Example: 95 mm"></div>
 <div class="field"><label>Slot</label><input id="slot" placeholder="Example: 36"></div>
 <div class="field"><label>Pitch</label><input id="pitch" placeholder="Example: 1-10"></div>
 <div class="field"><label>Turns</label><input id="turns" placeholder="Example: 28"></div>
-<div class="field"><label>Wire Size</label><input id="wire" placeholder="Example: 0.90 mm"></div>
+<div class="field"><label>Wire Gege</label><input id="wire" placeholder="Example: 0.90 mm"></div>
 <div class="field"><label>Connection Type</label><select id="connection"><option value="">Select Connection</option><option>Star</option><option>Delta</option><option>Star-Delta</option><option>Other</option></select></div>
 <div class="field full"><label>Coil / Winding Details</label><textarea id="coilDetails" placeholder="Coil group, coil span, parallel wire etc."></textarea></div>
 <div class="field full"><label>Extra Notes</label><textarea id="notes" placeholder="Koi bhi extra information..."></textarea></div>
 </div><button id="saveButton" class="save-btn" onclick="saveMotor()"> Save Motor Data</button><button class="clear-btn" onclick="clearForm()">Clear</button></section>
 <section class="saved-card"><div class="list-header"><div><h2> Saved Motors</h2><p>Name, HP, Stator Length, Pitch, Turns, Wire, Slot ya koi bhi data search kare.</p></div><div class="search-box"> <input id="search" type="search" placeholder="Search motor data..." oninput="showMotors()"></div></div><div id="motorList"></div></section></main>
-<div id="detailsBox" class="popup"><div class="popup-content"><button class="close" onclick="closeDetails()">×</button><div id="details"></div></div></div>
+<div id="detailsBox" class="popup"><div class="popup-content"><button class="close" onclick="closeDetails()">Ã—</button><div id="details"></div></div></div>
 <script>
 const SUPABASE_URL="https://slqjlampmfeohiswudmv.supabase.co";
 const SUPABASE_KEY="sb_publishable_0OcqH2qkGYF9U3vYtSZBMA_X0ryMcw2";
@@ -636,7 +633,7 @@ function toDB(){let r={};fields.forEach(([a,b])=>r[b]=document.getElementById(a)
 async function loadMotors(){try{motors=(await api("?select=*&order=id.desc")).map(fromDB);status(" Database connected. Online motor data loaded.");showMotors()}catch(e){status("Database load nahi hua: "+e.message,true);showMotors()}}
 async function saveMotor(){let row=toDB();if(!row.motor_name&&!row.hp&&!row.stator_length){alert("Motor Name, HP ya Stator Length me se kuch data bhare.");return}let b=document.getElementById("saveButton");b.disabled=true;try{if(editId===null){await api("?select=*",{method:"POST",headers:{"Prefer":"return=representation"},body:JSON.stringify(row)});status(" Naya motor data Database mein save ho gaya.");alert("Motor data online save ho gaya!")}else{await api("?id=eq."+encodeURIComponent(editId),{method:"PATCH",headers:{"Prefer":"return=representation"},body:JSON.stringify(row)});editId=null;status(" Motor data update ho gaya.");alert("Motor data update ho gaya!")}clearForm();await loadMotors()}catch(e){status("Save/Update nahi hua: "+e.message,true);alert("Save/Update nahi hua:\n"+e.message)}finally{b.disabled=false}}
 function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
-function showMotors(){let list=document.getElementById("motorList"),q=document.getElementById("search").value.trim().toLowerCase();list.innerHTML="";let found=motors.filter(m=>fields.some(([a])=>String(m[a]||"").toLowerCase().includes(q)));document.getElementById("totalMotors").textContent=motors.length;document.getElementById("searchCount").textContent=found.length;if(!found.length){list.innerHTML='<div class="empty"><p>'+(q?"Is search ka motor data nahi mila.":"Abhi Database mein koi motor data nahi hai.")+'</p></div>';return}found.forEach(m=>{let d=document.createElement("div");d.className="motor-item";let quick=[["Stator Length",m.statorLength],["Stator Golai",m.statorGolai],["Rotor Length",m.rotorLength],["Pitch",m.pitch],["Turns",m.turns],["Wire",m.wire],["Slot",m.slot],["RPM",m.rpm]];d.innerHTML='<div class="motor-title"><div><h3>'+esc(m.motorName||"Motor")+'</h3><span>'+esc(m.hp||"")+(m.connection?" • "+esc(m.connection):"")+'</span></div><small>'+esc(m.date)+'</small></div><div class="quick-data">'+quick.map(([a,v])=>'<div><b>'+a+'</b><span>'+esc(v||"-")+'</span></div>').join("")+'</div><div class="buttons"><button class="view-btn">View</button><button class="edit-btn">Edit</button><button class="delete-btn"> Delete</button></div>';let bs=d.querySelectorAll("button");bs[0].onclick=()=>viewMotor(m.id);bs[1].onclick=()=>editMotor(m.id);bs[2].onclick=()=>deleteMotor(m.id);list.append(d)})}
+function showMotors(){let list=document.getElementById("motorList"),q=document.getElementById("search").value.trim().toLowerCase();list.innerHTML="";let found=motors.filter(m=>fields.some(([a])=>String(m[a]||"").toLowerCase().includes(q)));document.getElementById("totalMotors").textContent=motors.length;document.getElementById("searchCount").textContent=found.length;if(!found.length){list.innerHTML='<div class="empty"><p>'+(q?"Is search ka motor data nahi mila.":"Abhi Database mein koi motor data nahi hai.")+'</p></div>';return}found.forEach(m=>{let d=document.createElement("div");d.className="motor-item";let quick=[["Stator Length",m.statorLength],["Stator Golai",m.statorGolai],["Rotor Length",m.rotorLength],["Pitch",m.pitch],["Turns",m.turns],["Wire",m.wire],["Slot",m.slot],["RPM",m.rpm]];d.innerHTML='<div class="motor-title"><div><h3>'+esc(m.motorName||"Motor")+'</h3><span>'+esc(m.hp||"")+(m.connection?" Â• "+esc(m.connection):"")+'</span></div><small>'+esc(m.date)+'</small></div><div class="quick-data">'+quick.map(([a,v])=>'<div><b>'+a+'</b><span>'+esc(v||"-")+'</span></div>').join("")+'</div><div class="buttons"><button class="view-btn">View</button><button class="edit-btn">Edit</button><button class="delete-btn"> Delete</button></div>';let bs=d.querySelectorAll("button");bs[0].onclick=()=>viewMotor(m.id);bs[1].onclick=()=>editMotor(m.id);bs[2].onclick=()=>deleteMotor(m.id);list.append(d)})}
 function viewMotor(id){let m=motors.find(x=>String(x.id)===String(id));if(!m)return;let det=fields.map(([a,b])=>'<div><b>'+esc(b.replaceAll("_"," "))+'</b><span>'+esc(m[a]||"-")+'</span></div>').join("");document.getElementById("details").innerHTML='<h2> '+esc(m.motorName||"Motor")+'</h2><div class="details-grid">'+det+'</div><p><b>Saved:</b> '+esc(m.date)+'</p>';document.getElementById("detailsBox").style.display="flex"}
 function closeDetails(){document.getElementById("detailsBox").style.display="none"}
 function editMotor(id){let m=motors.find(x=>String(x.id)===String(id));if(!m)return;fields.forEach(([a])=>document.getElementById(a).value=m[a]||"");editId=m.id;document.getElementById("saveButton").textContent=" Update Motor Data";window.scrollTo({top:0,behavior:"smooth"})}
