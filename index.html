@@ -1,643 +1,228 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Motor Winding Data</title><link rel="stylesheet" href="style.css">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motor Winding Data</title>
+<link rel="stylesheet" href="style.css">
 <style>
-
-
- {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f2f4f7;color:#20242b;line-height:1.5}
+header{display:flex;align-items:center;gap:15px;padding:18px 20px;background:linear-gradient(135deg,#15171d,#292d36);color:#fff;border-bottom:4px solid #e31e24;box-shadow:0 5px 18px rgba(0,0,0,.18)}
+.logo-box{width:64px;height:64px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:14px;padding:5px}
+.logo{width:100%;height:100%;object-fit:contain}
+.header-text h1{margin:0;font-size:25px;font-weight:800;letter-spacing:.4px;color:#fff}
+.header-text p{margin:4px 0 0;font-size:13px;color:#d9dce3}
+main{width:100%;max-width:1000px;margin:24px auto;padding:0 16px}
+#statusMessage{padding:13px 15px;margin:0 0 18px;border-radius:10px;background:#e8f3ff;color:#154a7a;border-left:4px solid #1976d2;font-size:14px;overflow-wrap:anywhere}
+.stats{display:flex;gap:15px;margin-bottom:20px}
+.stat-box{flex:1;display:flex;align-items:center;gap:13px;padding:19px;background:#fff;border-radius:14px;border:1px solid #e6e8ed;box-shadow:0 4px 15px rgba(0,0,0,.05)}
+.stat-box>div{font-size:14px;color:#626975}
+.stat-box strong{display:inline-block;margin-top:4px;font-size:27px;color:#d71920}
+.stat-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:12px;background:#fff0f0;font-size:25px}
+.form-card,.saved-card{background:#fff;padding:22px;margin-bottom:22px;border-radius:16px;border:1px solid #e7e9ee;box-shadow:0 5px 20px rgba(0,0,0,.055)}
+.form-card h2,.saved-card h2{margin:0 0 18px;padding-bottom:12px;color:#20242b;font-size:21px;border-bottom:2px solid #f0f1f4}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.full{grid-column:1/-1}
+label{color:#333944;font-size:14px;font-weight:700}
+input,select,textarea{width:100%;min-width:0;padding:12px 13px;border:1px solid #d7dbe2;border-radius:9px;background:#fafbfc;color:#222;font-family:inherit;font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s,background .2s}
+input:focus,select:focus,textarea:focus{border-color:#d71920;background:#fff;box-shadow:0 0 0 3px rgba(215,25,32,.1)}
+input::placeholder,textarea::placeholder{color:#969ca6;font-size:13px}
+textarea{min-height:90px;resize:vertical}
+button{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 17px;margin:8px 5px 0 0;border:0;border-radius:9px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
+button:active{transform:scale(.98)}
+button:disabled{opacity:.6;cursor:not-allowed}
+.save-btn{background:linear-gradient(135deg,#ed252c,#bd1018);color:#fff;box-shadow:0 4px 10px rgba(215,25,32,.2)}
+.clear-btn{background:#edf0f4;color:#333944}
+.view-btn{background:#1976d2;color:#fff}
+.edit-btn{background:#f0a11a;color:#222}
+.delete-btn{background:#c62828;color:#fff}
+.list-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
+.list-header h2{margin-bottom:8px}
+.list-header p{margin:0;color:#727985;font-size:13px}
+.search-box{display:flex;align-items:center;gap:8px;width:290px;flex-shrink:0}
+.search-box input{background:#fff}
+.motor-item{padding:17px;margin-top:15px;background:#fff;border:1px solid #e2e5ea;border-left:5px solid #d71920;border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,.04)}
+.motor-title{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.motor-title h3{margin:0 0 5px;font-size:18px;color:#c71920;overflow-wrap:anywhere}
+.motor-title span{color:#555d69;font-size:13px}
+.motor-title small{color:#818793;font-size:12px;white-space:nowrap}
+.quick-data,.details-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:15px}
+.quick-data>div,.details-grid>div{display:flex;flex-direction:column;gap:4px;min-width:0;padding:10px;background:#f6f7f9;border:1px solid #eceef2;border-radius:8px;overflow-wrap:anywhere}
+.quick-data b,.details-grid b{color:#727985;font-size:12px;text-transform:capitalize}
+.quick-data span,.details-grid span{color:#242832;font-size:14px;font-weight:600;overflow-wrap:anywhere}
+.buttons{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.empty{padding:28px 15px;text-align:center;color:#737985;background:#fafbfc;border:1px dashed #d7dbe2;border-radius:10px}
+.popup{display:none;position:fixed;inset:0;z-index:999;align-items:center;justify-content:center;padding:15px;background:rgba(12,15,22,.75);backdrop-filter:blur(4px)}
+.popup-content{width:100%;max-width:650px;max-height:85vh;overflow-y:auto;padding:22px;background:#fff;border-radius:16px;box-shadow:0 15px 50px rgba(0,0,0,.25)}
+.popup-content h2{color:#d71920;overflow-wrap:anywhere}
+.close{float:right;width:36px;height:36px;padding:0;margin:0 0 10px 10px;background:#f0f1f4;color:#222;font-size:23px}
+@media(max-width:600px){
+header{gap:12px;padding:14px 12px}.logo-box{width:52px;height:52px;border-radius:10px}
+.header-text h1{font-size:19px;letter-spacing:0}.header-text p{font-size:11px}
+main{margin:15px auto;padding:0 10px}.stats{gap:10px}
+.stat-box{padding:12px 9px;gap:8px}.stat-icon{width:35px;height:35px;font-size:19px}
+.stat-box>div{font-size:12px}.stat-box strong{font-size:23px}
+.form-card,.saved-card{padding:15px;border-radius:12px;margin-bottom:16px}
+.form-card h2,.saved-card h2{font-size:19px}.form-grid{grid-template-columns:minmax(0,1fr);gap:13px}.full{grid-column:auto}
+input,select,textarea{font-size:16px;padding:12px}
+.list-header{flex-direction:column;gap:12px}.search-box{width:100%}
+.motor-item{padding:13px}.motor-title h3{font-size:16px}
+.quick-data,.details-grid{gap:7px}.quick-data>div,.details-grid>div{padding:9px}
+.buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.buttons button{width:100%;margin:5px 0 0;padding:10px 3px;font-size:12px}
+.form-card>button{margin-top:12px}.popup-content{padding:16px}
 }
-
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f2f4f7;
-    color: #20242b;
-    line-height: 1.5;
+@media(max-width:360px){
+.header-text h1{font-size:17px}.logo-box{width:45px;height:45px}
+.stats{flex-direction:column}.quick-data,.details-grid{grid-template-columns:1fr}
 }
-
-/* ===== HEADER ===== */
-
-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 18px 20px;
-    background: linear-gradient(135deg, #15171d, #292d36);
-    color: #fff;
-    border-bottom: 4px solid #e31e24;
-    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
-}
-
-.logo-box {
-    width: 64px;
-    height: 64px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    border-radius: 14px;
-    padding: 5px;
-}
-
-.logo {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.header-text h1 {
-    margin: 0;
-    font-size: 25px;
-    font-weight: 800;
-    letter-spacing: 0.4px;
-    color: #fff;
-}
-
-.header-text p {
-    margin: 4px 0 0;
-    font-size: 13px;
-    color: #d9dce3;
-}
-
-/* ===== MAIN CONTAINER ===== */
-
-main {
-    width: 100%;
-    max-width: 1000px;
-    margin: 24px auto;
-    padding: 0 16px;
-}
-
-/* ===== STATUS MESSAGE ===== */
-
-#statusMessage {
-    padding: 13px 15px;
-    margin: 0 0 18px;
-    border-radius: 10px;
-    background: #e8f3ff;
-    color: #154a7a;
-    border-left: 4px solid #1976d2;
-    font-size: 14px;
-    overflow-wrap: anywhere;
-}
-
-/* ===== STATISTICS ===== */
-
-.stats {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.stat-box {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    padding: 19px;
-    background: #fff;
-    border-radius: 14px;
-    border: 1px solid #e6e8ed;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-.stat-box > div {
-    font-size: 14px;
-    color: #626975;
-}
-
-.stat-box strong {
-    display: inline-block;
-    margin-top: 4px;
-    font-size: 27px;
-    color: #d71920;
-}
-
-.stat-icon {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    border-radius: 12px;
-    background: #fff0f0;
-    font-size: 25px;
-}
-
-/* ===== CARDS ===== */
-
-.form-card,
-.saved-card {
-    background: #fff;
-    padding: 22px;
-    margin-bottom: 22px;
-    border-radius: 16px;
-    border: 1px solid #e7e9ee;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.055);
-}
-
-.form-card h2,
-.saved-card h2 {
-    margin: 0 0 18px;
-    padding-bottom: 12px;
-    color: #20242b;
-    font-size: 21px;
-    border-bottom: 2px solid #f0f1f4;
-}
-
-.form-card h2::first-letter,
-.saved-card h2::first-letter {
-    color: #d71920;
-}
-
-/* ===== FORM GRID ===== */
-
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 17px;
-}
-
-.field {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    min-width: 0;
-}
-
-.full {
-    grid-column: 1 / -1;
-}
-
-label {
-    color: #333944;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-/* ===== INPUTS ===== */
-
-input,
-select,
-textarea {
-    width: 100%;
-    min-width: 0;
-    padding: 12px 13px;
-    border: 1px solid #d7dbe2;
-    border-radius: 9px;
-    background: #fafbfc;
-    color: #222;
-    font-family: inherit;
-    font-size: 15px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s,
-                background 0.2s;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: #d71920;
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(215, 25, 32, 0.10);
-}
-
-input::placeholder,
-textarea::placeholder {
-    color: #969ca6;
-    font-size: 13px;
-}
-
-textarea {
-    min-height: 90px;
-    resize: vertical;
-}
-
-/* ===== BUTTONS ===== */
-
-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 11px 17px;
-    margin: 8px 5px 0 0;
-    border: none;
-    border-radius: 9px;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s,
-                background 0.2s;
-}
-
-button:active {
-    transform: scale(0.98);
-}
-
-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.save-btn {
-    background: linear-gradient(135deg, #ed252c, #bd1018);
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(215, 25, 32, 0.20);
-}
-
-.save-btn:hover {
-    box-shadow: 0 6px 15px rgba(215, 25, 32, 0.28);
-}
-
-.clear-btn {
-    background: #edf0f4;
-    color: #333944;
-}
-
-.clear-btn:hover {
-    background: #dfe3e9;
-}
-
-.view-btn {
-    background: #1976d2;
-    color: #fff;
-}
-
-.edit-btn {
-    background: #f0a11a;
-    color: #222;
-}
-
-.delete-btn {
-    background: #c62828;
-    color: #fff;
-}
-
-/* ===== SAVED MOTORS HEADER ===== */
-
-.list-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 18px;
-}
-
-.list-header h2 {
-    margin-bottom: 8px;
-}
-
-.list-header p {
-    margin: 0;
-    color: #727985;
-    font-size: 13px;
-}
-
-.search-box {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 290px;
-    flex-shrink: 0;
-}
-
-.search-box input {
-    background: #fff;
-}
-
-/* ===== MOTOR DATA CARDS ===== */
-
-.motor-item {
-    padding: 17px;
-    margin-top: 15px;
-    background: #fff;
-    border: 1px solid #e2e5ea;
-    border-left: 5px solid #d71920;
-    border-radius: 12px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
-    transition: box-shadow 0.2s;
-}
-
-.motor-item:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-}
-
-.motor-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 10px;
-}
-
-.motor-title h3 {
-    margin: 0 0 5px;
-    font-size: 18px;
-    color: #c71920;
-    overflow-wrap: anywhere;
-}
-
-.motor-title span {
-    color: #555d69;
-    font-size: 13px;
-}
-
-.motor-title small {
-    color: #818793;
-    font-size: 12px;
-    white-space: nowrap;
-}
-
-.quick-data,
-.details-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 9px;
-    margin-top: 15px;
-}
-
-.quick-data > div,
-.details-grid > div {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    min-width: 0;
-    padding: 10px;
-    background: #f6f7f9;
-    border: 1px solid #eceef2;
-    border-radius: 8px;
-    overflow-wrap: anywhere;
-}
-
-.quick-data b,
-.details-grid b {
-    color: #727985;
-    font-size: 12px;
-    text-transform: capitalize;
-}
-
-.quick-data span,
-.details-grid span {
-    color: #242832;
-    font-size: 14px;
-    font-weight: 600;
-    overflow-wrap: anywhere;
-}
-
-.buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 10px;
-}
-
-/* ===== EMPTY SEARCH RESULT ===== */
-
-.empty {
-    padding: 28px 15px;
-    text-align: center;
-    color: #737985;
-    background: #fafbfc;
-    border: 1px dashed #d7dbe2;
-    border-radius: 10px;
-}
-
-/* ===== POPUP DETAILS ===== */
-
-.popup {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    background: rgba(12, 15, 22, 0.75);
-    backdrop-filter: blur(4px);
-}
-
-.popup-content {
-    width: 100%;
-    max-width: 650px;
-    max-height: 85vh;
-    overflow-y: auto;
-    padding: 22px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
-}
-
-.popup-content h2 {
-    color: #d71920;
-    overflow-wrap: anywhere;
-}
-
-.close {
-    float: right;
-    width: 36px;
-    height: 36px;
-    padding: 0;
-    margin: 0 0 10px 10px;
-    background: #f0f1f4;
-    color: #222;
-    font-size: 23px;
-}
-
-/* ===== MOBILE RESPONSIVE ===== */
-
-@media (max-width: 600px) {
-    header {
-        gap: 12px;
-        padding: 14px 12px;
-    }
-
-    .logo-box {
-        width: 52px;
-        height: 52px;
-        border-radius: 10px;
-    }
-
-    .header-text h1 {
-        font-size: 19px;
-        letter-spacing: 0;
-    }
-
-    .header-text p {
-        font-size: 11px;
-    }
-
-    main {
-        margin: 15px auto;
-        padding: 0 10px;
-    }
-
-    .stats {
-        gap: 10px;
-    }
-
-    .stat-box {
-        padding: 12px 9px;
-        gap: 8px;
-    }
-
-    .stat-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 19px;
-    }
-
-    .stat-box > div {
-        font-size: 12px;
-    }
-
-    .stat-box strong {
-        font-size: 23px;
-    }
-
-    .form-card,
-    .saved-card {
-        padding: 15px;
-        border-radius: 12px;
-        margin-bottom: 16px;
-    }
-
-    .form-card h2,
-    .saved-card h2 {
-        font-size: 19px;
-    }
-
-    .form-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 13px;
-    }
-
-    .full {
-        grid-column: auto;
-    }
-
-    input,
-    select,
-    textarea {
-        font-size: 16px;
-        padding: 12px;
-    }
-
-    .list-header {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .search-box {
-        width: 100%;
-    }
-
-    .motor-item {
-        padding: 13px;
-    }
-
-    .motor-title h3 {
-        font-size: 16px;
-    }
-
-    .quick-data,
-    .details-grid {
-        gap: 7px;
-    }
-
-    .quick-data > div,
-    .details-grid > div {
-        padding: 9px;
-    }
-
-    .buttons {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 6px;
-    }
-
-    .buttons button {
-        width: 100%;
-        margin: 5px 0 0;
-        padding: 10px 3px;
-        font-size: 12px;
-    }
-
-    .form-card > button {
-        margin-top: 12px;
-    }
-
-    .popup-content {
-        padding: 16px;
-    }
-}
-
-/* ===== SMALL MOBILE ===== */
-
-@media (max-width: 360px) {
-    .header-text h1 {
-        font-size: 17px;
-    }
-
-    .logo-box {
-        width: 45px;
-        height: 45px;
-    }
-
-    .stats {
-        flex-direction: column;
-    }
-
-    .quick-data,
-    .details-grid {
-        grid-template-columns: 1fr;
-    }
-}
-</style></head><body>
+</style>
+</head>
+<body>
 <header><div class="logo-box"><img src="logo.png" alt="Logo" class="logo"></div><div class="header-text"><h1>Motor Winding Data</h1><p>Motor ka data save aur search kare</p></div></header>
-<main><div id="statusMessage">Database se connect ho raha hai...</div>
-<section class="stats"><div class="stat-box"><span class="stat-icon"></span><div>Total Motors<br><strong id="totalMotors">0</strong></div></div><div class="stat-box"><span class="stat-icon"></span><div>Search Result<br><strong id="searchCount">0</strong></div></div></section>
-<section class="form-card"><h2> New Motor Data</h2><div class="form-grid">
-<div class="field"><label>Motor Name / Customer</label><input id="motorName" placeholder="Example: 3 HP Motor"></div>
-<div class="field"><label>HP</label><input id="hp" placeholder="Example: 3 HP"></div>
-<div class="field"><label>Voltage</label><input id="voltage" placeholder="Example: 415V"></div>
-<div class="field"><label>RPM</label><input id="rpm" placeholder="Example: 1440"></div>
-<div class="field"><label>Stator Length</label><input id="statorLength" placeholder="Example: 100 mm"></div>
-<div class="field"><label>Stator Golai</label><input id="statorGolai" placeholder="Example: 120 mm"></div>
-<div class="field"><label>Rotor Length</label><input id="rotorLength" placeholder="Example: 95 mm"></div>
-<div class="field"><label>Slot</label><input id="slot" placeholder="Example: 36"></div>
-<div class="field"><label>Pitch</label><input id="pitch" placeholder="Example: 1-10"></div>
-<div class="field"><label>Turns</label><input id="turns" placeholder="Example: 28"></div>
-<div class="field"><label>Wire Size</label><input id="wire" placeholder="Example: 0.90 mm"></div>
-<div class="field"><label>Connection Type</label><select id="connection"><option value="">Select Connection</option><option>Star</option><option>Delta</option><option>Star-Delta</option><option>Other</option></select></div>
-<div class="field full"><label>Coil / Winding Details</label><textarea id="coilDetails" placeholder="Coil group, coil span, parallel wire etc."></textarea></div>
-<div class="field full"><label>Extra Notes</label><textarea id="notes" placeholder="Koi bhi extra information..."></textarea></div>
-</div><button id="saveButton" class="save-btn" onclick="saveMotor()"> Save Motor Data</button><button class="clear-btn" onclick="clearForm()">Clear</button></section>
-<section class="saved-card"><div class="list-header"><div><h2> Saved Motors</h2><p>Name, HP, Stator Length, Pitch, Turns, Wire, Slot ya koi bhi data search kare.</p></div><div class="search-box"> <input id="search" type="search" placeholder="Search motor data..." oninput="showMotors()"></div></div><div id="motorList"></div></section></main>
-<div id="detailsBox" class="popup"><div class="popup-content"><button class="close" onclick="closeDetails()">×</button><div id="details"></div></div></div>
+<main>
+<div id="statusMessage">Database se connect ho raha hai...</div>
+<section class="stats">
+<div class="stat-box"><span class="stat-icon"></span><div>Total Motors<br><strong id="totalMotors">0</strong></div></div>
+<div class="stat-box"><span class="stat-icon"></span><div>Search Result<br><strong id="searchCount">0</strong></div></div>
+</section>
+<section class="form-card">
+<h2>New Motor Data</h2>
+<div class="form-grid">
+<div class="field"><label for="motorName">Motor Name / Customer</label><input id="motorName" placeholder="Example: 3 HP Motor"></div>
+<div class="field"><label for="hp">HP</label><input id="hp" placeholder="Example: 3 HP"></div>
+<div class="field"><label for="voltage">Voltage</label><input id="voltage" placeholder="Example: 415V"></div>
+<div class="field"><label for="rpm">RPM</label><input id="rpm" placeholder="Example: 1440"></div>
+<div class="field"><label for="statorLength">Stator Length</label><input id="statorLength" placeholder="Example: 100 mm"></div>
+<div class="field"><label for="rotorLength">Rotor Length</label><input id="rotorLength" placeholder="Example: 95 mm"></div>
+<div class="field"><label for="rotorGolai">Rotor Golai</label><input id="rotorGolai" placeholder="Example: 120 mm"></div>
+<div class="field"><label for="statorGolai">Stator Golai</label><input id="statorGolai" placeholder="Example: 120 mm"></div>
+<div class="field"><label for="slot">Slot</label><input id="slot" placeholder="Example: 36"></div>
+<div class="field"><label for="coil">Coil</label><input id="coil" placeholder="Coil ka naam ya number"></div>
+<div class="field"><label for="pitch">Pitch</label><input id="pitch" placeholder="Example: 1-10"></div>
+<div class="field"><label for="turns">Turns</label><input id="turns" placeholder="Example: 28"></div>
+<div class="field"><label for="wire">Wire Size</label><input id="wire" placeholder="Example: 0.90 mm"></div>
+<div class="field"><label for="wireWeight">Wire Weight</label><input id="wireWeight" placeholder="Example: 250 gram ya 1 kg"></div>
+<div class="field"><label for="connection">Connection Type</label><select id="connection"><option value="">Select Connection</option><option>Star</option><option>Delta</option><option>Star-Delta</option><option>Other</option></select></div>
+<div class="field full"><label for="coilDetails">Coil / Winding Details</label><textarea id="coilDetails" placeholder="Coil group, coil span, parallel wire etc."></textarea></div>
+<div class="field full"><label for="notes">Extra Notes</label><textarea id="notes" placeholder="Koi bhi extra information..."></textarea></div>
+</div>
+<button id="saveButton" class="save-btn" onclick="saveMotor()"> Save Motor Data</button>
+<button class="clear-btn" onclick="clearForm()">Clear</button>
+</section>
+<section class="saved-card">
+<div class="list-header"><div><h2> Saved Motors</h2><p>Name, HP, Rotor Length, Rotor Golai, Stator Golai, Coil, Wire Weight ya koi bhi data search kare.</p></div><div class="search-box"> <input id="search" type="search" placeholder="Search motor data..." oninput="showMotors()"></div></div>
+<div id="motorList"></div>
+</section>
+</main>
+<div id="detailsBox" class="popup"><div class="popup-content"><button class="close" onclick="closeDetails()" aria-label="Close">Ã—</button><div id="details"></div></div></div>
 <script>
 const SUPABASE_URL="https://slqjlampmfeohiswudmv.supabase.co";
 const SUPABASE_KEY="sb_publishable_0OcqH2qkGYF9U3vYtSZBMA_X0ryMcw2";
 const TABLE_URL=SUPABASE_URL+"/rest/v1/motors";
 const HEADERS={"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Content-Type":"application/json"};
-const fields=[["motorName","motor_name"],["hp","hp"],["voltage","voltage"],["rpm","rpm"],["statorLength","stator_length"],["statorGolai","stator_golai"],["rotorLength","rotor_length"],["slot","slot"],["pitch","pitch"],["turns","turns"],["wire","wire"],["connection","connection"],["coilDetails","coil_details"],["notes","notes"]];
+const fields=[
+["motorName","motor_name"],["hp","hp"],["voltage","voltage"],["rpm","rpm"],
+["statorLength","stator_length"],["rotorLength","rotor_length"],
+["rotorGolai","rotor_golai"],["statorGolai","stator_golai"],
+["slot","slot"],["coil","coil"],["pitch","pitch"],["turns","turns"],
+["wire","wire"],["wireWeight","wire_weight"],["connection","connection"],
+["coilDetails","coil_details"],["notes","notes"]
+];
 let motors=[],editId=null;
-function status(t,bad=false){let e=document.getElementById("statusMessage");e.textContent=t;e.style.background=bad?"#ffebee":"#e8f3ff";e.style.color=bad?"#a31515":"#154a7a"}
-async function api(path="",opts={}){let r=await fetch(TABLE_URL+path,{...opts,headers:{...HEADERS,...(opts.headers||{})}});let t=await r.text();if(!r.ok){let msg=t;try{let j=JSON.parse(t);msg=j.message||j.details||j.hint||t}catch(e){}throw Error("HTTP "+r.status+": "+msg)}return t?JSON.parse(t):[]}
-function fromDB(r){let m={id:r.id,date:r.created_at?new Date(r.created_at).toLocaleDateString("en-IN"):""};fields.forEach(([a,b])=>m[a]=r[b]||"");return m}
-function toDB(){let r={};fields.forEach(([a,b])=>r[b]=document.getElementById(a).value.trim());return r}
-async function loadMotors(){try{motors=(await api("?select=*&order=id.desc")).map(fromDB);status(" Database connected. Online motor data loaded.");showMotors()}catch(e){status("Database load nahi hua: "+e.message,true);showMotors()}}
-async function saveMotor(){let row=toDB();if(!row.motor_name&&!row.hp&&!row.stator_length){alert("Motor Name, HP ya Stator Length me se kuch data bhare.");return}let b=document.getElementById("saveButton");b.disabled=true;try{if(editId===null){await api("?select=*",{method:"POST",headers:{"Prefer":"return=representation"},body:JSON.stringify(row)});status(" Naya motor data Database mein save ho gaya.");alert("Motor data online save ho gaya!")}else{await api("?id=eq."+encodeURIComponent(editId),{method:"PATCH",headers:{"Prefer":"return=representation"},body:JSON.stringify(row)});editId=null;status(" Motor data update ho gaya.");alert("Motor data update ho gaya!")}clearForm();await loadMotors()}catch(e){status("Save/Update nahi hua: "+e.message,true);alert("Save/Update nahi hua:\n"+e.message)}finally{b.disabled=false}}
+function status(t,bad=false){
+const e=document.getElementById("statusMessage");
+e.textContent=t;e.style.background=bad?"#ffebee":"#e8f3ff";
+e.style.color=bad?"#a31515":"#154a7a";
+e.style.borderLeftColor=bad?"#c62828":"#1976d2";
+}
+async function api(path="",opts={}){
+const r=await fetch(TABLE_URL+path,{...opts,headers:{...HEADERS,...(opts.headers||{})}});
+const t=await r.text();
+if(!r.ok){let msg=t;try{const j=JSON.parse(t);msg=j.message||j.details||j.hint||t}catch(e){}throw Error("HTTP "+r.status+": "+msg)}
+return t?JSON.parse(t):[];
+}
+function fromDB(r){
+const m={id:r.id,date:r.created_at?new Date(r.created_at).toLocaleDateString("en-IN"):""};
+fields.forEach(([a,b])=>m[a]=r[b]??"");
+return m;
+}
+function toDB(){
+const r={};fields.forEach(([a,b])=>r[b]=document.getElementById(a).value.trim());
+return r;
+}
+async function loadMotors(){
+try{
+motors=(await api("?select=*&order=id.desc")).map(fromDB);
+status("… Dhiru Database Se connect Ho Gya. Online motor data loaded.");
+showMotors();
+}catch(e){status("Database load nahi hua: "+e.message,true);showMotors()}
+}
+async function saveMotor(){
+const row=toDB();
+if(!row.motor_name&&!row.hp&&!row.stator_length){
+alert("Motor Name, HP ya Stator Length me se kuch data bhare.");return;
+}
+const b=document.getElementById("saveButton");b.disabled=true;
+try{
+if(editId===null){
+await api("?select=*",{method:"POST",headers:{"Prefer":"return=representation"},body:JSON.stringify(row)});
+status("âœ… Naya motor data Database mein save ho gaya.");
+alert("Motor data online save ho gaya!");
+}else{
+await api("?id=eq."+encodeURIComponent(editId),{method:"PATCH",headers:{"Prefer":"return=representation"},body:JSON.stringify(row)});
+editId=null;status("âœ… Motor data update ho gaya.");alert("Motor data update ho gaya!");
+}
+clearForm();await loadMotors();
+}catch(e){status("Save/Update nahi hua: "+e.message,true);alert("Save/Update nahi hua:\n"+e.message)}
+finally{b.disabled=false}
+}
 function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
-function showMotors(){let list=document.getElementById("motorList"),q=document.getElementById("search").value.trim().toLowerCase();list.innerHTML="";let found=motors.filter(m=>fields.some(([a])=>String(m[a]||"").toLowerCase().includes(q)));document.getElementById("totalMotors").textContent=motors.length;document.getElementById("searchCount").textContent=found.length;if(!found.length){list.innerHTML='<div class="empty"><p>'+(q?"Is search ka motor data nahi mila.":"Abhi Database mein koi motor data nahi hai.")+'</p></div>';return}found.forEach(m=>{let d=document.createElement("div");d.className="motor-item";let quick=[["Stator Length",m.statorLength],["Stator Golai",m.statorGolai],["Rotor Length",m.rotorLength],["Pitch",m.pitch],["Turns",m.turns],["Wire",m.wire],["Slot",m.slot],["RPM",m.rpm]];d.innerHTML='<div class="motor-title"><div><h3>'+esc(m.motorName||"Motor")+'</h3><span>'+esc(m.hp||"")+(m.connection?" • "+esc(m.connection):"")+'</span></div><small>'+esc(m.date)+'</small></div><div class="quick-data">'+quick.map(([a,v])=>'<div><b>'+a+'</b><span>'+esc(v||"-")+'</span></div>').join("")+'</div><div class="buttons"><button class="view-btn">View</button><button class="edit-btn">Edit</button><button class="delete-btn"> Delete</button></div>';let bs=d.querySelectorAll("button");bs[0].onclick=()=>viewMotor(m.id);bs[1].onclick=()=>editMotor(m.id);bs[2].onclick=()=>deleteMotor(m.id);list.append(d)})}
-function viewMotor(id){let m=motors.find(x=>String(x.id)===String(id));if(!m)return;let det=fields.map(([a,b])=>'<div><b>'+esc(b.replaceAll("_"," "))+'</b><span>'+esc(m[a]||"-")+'</span></div>').join("");document.getElementById("details").innerHTML='<h2> '+esc(m.motorName||"Motor")+'</h2><div class="details-grid">'+det+'</div><p><b>Saved:</b> '+esc(m.date)+'</p>';document.getElementById("detailsBox").style.display="flex"}
+function showMotors(){
+const list=document.getElementById("motorList"),q=document.getElementById("search").value.trim().toLowerCase();
+list.innerHTML="";
+const found=motors.filter(m=>fields.some(([a])=>String(m[a]||"").toLowerCase().includes(q)));
+document.getElementById("totalMotors").textContent=motors.length;
+document.getElementById("searchCount").textContent=found.length;
+if(!found.length){list.innerHTML='<div class="empty"><p>'+(q?"Is search ka motor data nahi mila.":"Abhi Database mein koi motor data nahi hai.")+'</p></div>';return}
+found.forEach(m=>{
+const d=document.createElement("div");d.className="motor-item";
+const quick=[
+["Stator Length",m.statorLength],["Rotor Length",m.rotorLength],
+["Rotor Golai",m.rotorGolai],["Stator Golai",m.statorGolai],
+["Slot",m.slot],["Coil",m.coil],["Pitch",m.pitch],
+["Turns",m.turns],["Wire Size",m.wire],["Wire Weight",m.wireWeight],["RPM",m.rpm]
+];
+d.innerHTML='<div class="motor-title"><div><h3>'+esc(m.motorName||"Motor")+'</h3><span>'+esc(m.hp||"")+(m.connection?" â€¢ "+esc(m.connection):"")+'</span></div><small>'+esc(m.date)+'</small></div><div class="quick-data">'+quick.map(([a,v])=>'<div><b>'+esc(a)+'</b><span>'+esc(v||"-")+'</span></div>').join("")+'</div><div class="buttons"><button class="view-btn">View</button><button class="edit-btn">Edit</button><button class="delete-btn">ðŸ—‘ï¸ Delete</button></div>';
+const bs=d.querySelectorAll("button");bs[0].onclick=()=>viewMotor(m.id);bs[1].onclick=()=>editMotor(m.id);bs[2].onclick=()=>deleteMotor(m.id);list.append(d);
+});
+}
+function viewMotor(id){
+const m=motors.find(x=>String(x.id)===String(id));if(!m)return;
+const labels={motor_name:"Motor Name / Customer",hp:"HP",voltage:"Voltage",rpm:"RPM",stator_length:"Stator Length",rotor_length:"Rotor Length",rotor_golai:"Rotor Golai",stator_golai:"Stator Golai",slot:"Slot",coil:"Coil",pitch:"Pitch",turns:"Turns",wire:"Wire Size",wire_weight:"Wire Weight",connection:"Connection Type",coil_details:"Coil / Winding Details",notes:"Extra Notes"};
+const det=fields.map(([a,b])=>'<div><b>'+esc(labels[b]||b.replaceAll("_"," "))+'</b><span>'+esc(m[a]||"-")+'</span></div>').join("");
+document.getElementById("details").innerHTML='<h2>âš™ï¸ '+esc(m.motorName||"Motor")+'</h2><div class="details-grid">'+det+'</div><p><b>Saved:</b> '+esc(m.date)+'</p>';
+document.getElementById("detailsBox").style.display="flex";
+}
 function closeDetails(){document.getElementById("detailsBox").style.display="none"}
-function editMotor(id){let m=motors.find(x=>String(x.id)===String(id));if(!m)return;fields.forEach(([a])=>document.getElementById(a).value=m[a]||"");editId=m.id;document.getElementById("saveButton").textContent=" Update Motor Data";window.scrollTo({top:0,behavior:"smooth"})}
-async function deleteMotor(id){if(!confirm("Kya aap ye motor data Database se delete karna chahte ho?"))return;try{await api("?id=eq."+encodeURIComponent(id),{method:"DELETE"});status("Motor data delete ho gaya.");await loadMotors()}catch(e){status("Delete nahi hua: "+e.message,true);alert(e.message)}}
-function clearForm(){fields.forEach(([a])=>document.getElementById(a).value="");editId=null;document.getElementById("saveButton").textContent=" Save Motor Data"}
+function editMotor(id){
+const m=motors.find(x=>String(x.id)===String(id));if(!m)return;
+fields.forEach(([a])=>document.getElementById(a).value=m[a]??"");
+editId=m.id;document.getElementById("saveButton").textContent="âœï¸ Update Motor Data";
+window.scrollTo({top:0,behavior:"smooth"});
+}
+async function deleteMotor(id){
+if(!confirm("Kya aap ye motor data Database se delete karna chahte ho?"))return;
+try{await api("?id=eq."+encodeURIComponent(id),{method:"DELETE"});status("Motor data delete ho gaya.");await loadMotors()}
+catch(e){status("Delete nahi hua: "+e.message,true);alert(e.message)}
+}
+function clearForm(){
+fields.forEach(([a])=>document.getElementById(a).value="");
+editId=null;document.getElementById("saveButton").textContent="ðŸ’¾ Save Motor Data";
+}
 loadMotors();
-</script></body></html>
+</script>
+</body>
+</html>
